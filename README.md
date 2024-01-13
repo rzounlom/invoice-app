@@ -46,7 +46,7 @@ Will work on a cleaner folder structure and testing in my next project
 
 ### Useful resources
 
-- https://fonts.google.com/specimen/Josefin+Sans - Google Josefin Sans url
+- https://fonts.google.com/specimen/League+Spartan - Google League Spartan url
 - https://vercel.com/ - Vercel for deploying my app
 - https://tailwindcss.com/docs - Tailwind CSS docs
 - https://nextjs.org/ - NextJS Docs
