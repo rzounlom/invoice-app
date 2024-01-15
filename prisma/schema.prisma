@@ -21,6 +21,7 @@ model User {
 }
 
 enum INVOICE_STATUS {
+  DRAFT
   PAID
   PENDING
 }
@@ -50,7 +51,7 @@ model Invoice {
   paymentTerms  Int
   clientName    String
   clientEmail   String
-  status        INVOICE_STATUS
+  status        INVOICE_STATUS @default(DRAFT)
   senderAddress Address
   clientAddress Address
   items         Item[]
