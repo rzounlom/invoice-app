@@ -22,8 +22,9 @@ model User {
 
 enum INVOICE_STATUS {
   DRAFT
-  PAID
   PENDING
+  PAID
+  ARCHIVED
 }
 
 type Address {
