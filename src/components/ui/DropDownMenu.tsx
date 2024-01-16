@@ -1,11 +1,11 @@
 "use client";
 
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { DropdownItem } from "@/types";
-import { Fragment } from "react";
 import Image from "next/image";
 import { dropdownItems } from "@/lib/data/dropdownItems";
 import { setFilterStatus } from "@/lib/features/invoice/invoicSlice";
@@ -15,17 +15,26 @@ function classNames(...classes: string[]) {
 }
 
 export default function DropdownMenu() {
+  const [active, setActive] = useState(false);
+
   const dispatch = useAppDispatch();
   const { filterStatus } = useAppSelector((state) => state.invoice);
 
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <div>
+      <div onClick={() => setActive(!active)}>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-1 py-2 text-sm font-semibold text-[#7C5DFA]">
-          <ChevronDownIcon
-            className="-mr-1 h-5 w-5 text-[#7C5DFA]"
-            aria-hidden="true"
-          />
+          {active ? (
+            <ChevronUpIcon
+              className="-mr-1 h-5 w-5 text-[#7C5DFA]"
+              aria-hidden="true"
+            />
+          ) : (
+            <ChevronDownIcon
+              className="-mr-1 h-5 w-5 text-[#7C5DFA]"
+              aria-hidden="true"
+            />
+          )}
         </Menu.Button>
       </div>
 
