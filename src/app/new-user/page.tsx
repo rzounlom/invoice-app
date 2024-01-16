@@ -5,16 +5,11 @@ import { redirect } from "next/navigation";
 
 const createNewUser = async () => {
   const user = await currentUser();
-
-  console.log({ clerkUser: user });
-
   const dbUser = await prisma.user.findUnique({
     where: {
       clerkId: user?.id as string,
     },
   });
-
-  console.log({ dbUser });
 
   if (!dbUser) {
     //if user somehow got created without the db knowing, create a new user in the db
