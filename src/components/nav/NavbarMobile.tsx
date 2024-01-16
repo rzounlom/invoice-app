@@ -28,11 +28,11 @@ const NavbarMobile: FC = () => {
     : "sun icon";
 
   return (
-    <nav className="w-screen h-[72px] md:h-[80px] bg-[#373B53] flex justify-between items-center">
-      <div className="h-full w-[72px]">
+    <nav className="w-full h-[72px] md:h-[80px] bg-[#373B53] dark:bg-[#1E2139] flex justify-between items-center xl:hidden">
+      <div className="h-[72px] w-[72px]">
         <Image
           src={"/img/logo.svg"}
-          alt="imvoice app logo"
+          alt="invoice app logo"
           height={72}
           width={72}
           priority

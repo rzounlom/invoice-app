@@ -23,7 +23,7 @@ export default function DropdownMenu() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div onClick={() => setActive(!active)}>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-1 py-2 text-sm font-semibold text-[#7C5DFA]">
+        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-transparent px-1 py-2 text-sm font-semibold text-[#7C5DFA]">
           {active ? (
             <ChevronUpIcon
               className="-mr-1 h-5 w-5 text-[#7C5DFA]"
@@ -47,7 +47,7 @@ export default function DropdownMenu() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute z-10 mt-2 w-36 md:w-[192px] origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute z-10 mt-2 w-36 md:w-[192px] origin-top-right rounded-md bg-white dark:bg-[#1E2139] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             {dropdownItems.map((item: DropdownItem) => (
               <div
@@ -60,7 +60,9 @@ export default function DropdownMenu() {
                       href="#"
                       className={classNames(
                         "flex items-center",
-                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        active
+                          ? "bg-gray-100 text-gray-900 dark:text-white"
+                          : "text-gray-700 dark:text-white",
                         "block px-4 py-2 text-sm"
                       )}
                     >
@@ -80,7 +82,7 @@ export default function DropdownMenu() {
                           />
                         )}
                       </div>
-                      <p className="ml-[8px]">{item.label}</p>
+                      <p className="ml-[8px] dark:text-white">{item.label}</p>
                     </a>
                   )}
                 </Menu.Item>
