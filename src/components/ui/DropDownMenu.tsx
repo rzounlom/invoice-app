@@ -52,7 +52,10 @@ export default function DropdownMenu() {
             {dropdownItems.map((item: DropdownItem) => (
               <div
                 key={item.id}
-                onClick={() => dispatch(setFilterStatus(item.name))}
+                onClick={() => {
+                  setActive(false);
+                  dispatch(setFilterStatus(item.name));
+                }}
               >
                 <Menu.Item>
                   {({ active }) => (
@@ -61,8 +64,8 @@ export default function DropdownMenu() {
                       className={classNames(
                         "flex items-center",
                         active
-                          ? "bg-gray-100 text-gray-900 dark:text-white"
-                          : "text-gray-700 dark:text-white",
+                          ? "bg-gray-100 dark:dark:bg-[#1E2139]  text-gray-900 dark:text-white"
+                          : "text-gray-700 dark:dark:bg-[#1E2139]  dark:text-white",
                         "block px-4 py-2 text-sm"
                       )}
                     >
