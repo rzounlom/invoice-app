@@ -1,5 +1,5 @@
 import { FC } from "react";
-import InvoiceHeader from "@/components/invoice/InvoiceHeader";
+import InvoiceHeader from "@/components/ui/invoice/InvoiceHeader";
 import { getUserFromClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 
@@ -23,7 +23,7 @@ const InvoicesPage: FC = async () => {
   console.log({ invoices });
   return (
     <div className="w-screen px-[24px] pt-[30px] pb-[100px]">
-      <InvoiceHeader />
+      <InvoiceHeader invoiceCount={invoices.length} />
     </div>
   );
 };

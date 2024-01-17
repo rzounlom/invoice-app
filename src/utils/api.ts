@@ -17,7 +17,7 @@ export const getInvoices = async (userId: string) => {
   }
 };
 
-export const createNewInvoices = async (invoice: Partial<Invoice>) => {
+export const createNewInvoice = async (invoice: Partial<Invoice>) => {
   const res = await fetch(
     new Request(createURL(`/api/invoices`), {
       method: "POST",

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import NavbarMobile from "@/components/nav/NavbarMobile";
+import NavbarMobile from "@/components/ui/nav/NavbarMobile";
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
