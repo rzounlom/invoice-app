@@ -1,3 +1,5 @@
+import { INVOICE_STATUS } from "@prisma/client";
+
 export type DropdownItem = {
   id: number;
   name: "draft" | "pending" | "paid";
@@ -5,12 +7,6 @@ export type DropdownItem = {
 };
 
 // invoice types
-enum INVOICE_STATUS {
-  DRAFT,
-  PENDING,
-  PAID,
-  ARCIHVED,
-}
 
 export type Address = {
   street: string;
