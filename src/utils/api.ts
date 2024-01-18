@@ -1,4 +1,4 @@
-import { Invoice } from "@/types";
+import { Invoice } from "@prisma/client";
 
 const createURL = (path: string) => window.location.origin + path;
 
