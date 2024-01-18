@@ -40,14 +40,16 @@ const NavbarMobile: FC = () => {
       </div>
       <div className="w-[160px] h-[100%] flex">
         <div className="w-[50%] h-[100%] flex justify-center items-center border-r-[1px] border-[#494E6E]">
-          <Image
-            className="hover:cursor-pointer"
-            src={themeIconSrc}
-            height={20}
-            width={20}
-            alt={themeIconAlt}
-            onClick={toggleTheme}
-          />
+          {isMounted && (
+            <Image
+              className="hover:cursor-pointer"
+              src={themeIconSrc}
+              height={20}
+              width={20}
+              alt={themeIconAlt}
+              onClick={toggleTheme}
+            />
+          )}
         </div>
         <div className="w-[50%] h-[100%] flex justify-center items-center">
           <UserButton afterSignOutUrl="/" />
