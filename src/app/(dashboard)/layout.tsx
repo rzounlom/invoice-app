@@ -7,9 +7,9 @@ type DashboardLayoutProps = {
 
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
   return (
-    <div className="w-screen h-screen relative">
+    <div className="w-full h-full relative">
       <NavbarMobile />
-      <div className="h-[calc(100vh-60px)]">{children}</div>
+      <div>{children}</div>
     </div>
   );
 };

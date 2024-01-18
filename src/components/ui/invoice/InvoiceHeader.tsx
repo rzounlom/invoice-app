@@ -23,7 +23,7 @@ const InvoiceHeader: FC<InvoiceHeaderProps> = ({ invoiceCount }) => {
         paymentTerms: 1,
         clientName: "Jensen Huang",
         clientEmail: "test@gmail.com",
-        status: INVOICE_STATUS.DRAFT,
+        status: INVOICE_STATUS.PENDING,
         userId: "65a2dcae8e53c996de9beab0",
         senderAddress: {
           street: "19 Union Terrace",

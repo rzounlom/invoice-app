@@ -1,18 +1,25 @@
 import { FC } from "react";
+import { Invoice } from "@prisma/client";
 import InvoiceHeader from "@/components/ui/invoice/InvoiceHeader";
+import InvoiceList from "@/components/ui/invoice/InvoiceList";
 import { getUserFromClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 
 const getInvoices = async () => {
+  let invoices: Invoice[] | [] = [];
+
   const user = await getUserFromClerkID();
-  const invoices = await prisma.invoice.findMany({
-    where: {
-      userId: user.id,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+
+  if (user) {
+    invoices = await prisma.invoice.findMany({
+      where: {
+        userId: user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }
 
   return invoices;
 };
@@ -20,10 +27,10 @@ const getInvoices = async () => {
 const InvoicesPage: FC = async () => {
   const invoices = await getInvoices();
 
-  console.log({ invoices });
   return (
-    <div className="w-screen px-[24px] pt-[30px] pb-[100px]">
+    <div className="w-full px-[24px] pt-[30px] pb-[100px] bg-#F8F8FB dark:bg-[#141625]">
       <InvoiceHeader invoiceCount={invoices.length} />
+      <InvoiceList invoices={invoices} />
     </div>
   );
 };
