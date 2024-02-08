@@ -3,26 +3,14 @@ import { Invoice } from "@prisma/client";
 import { formatNumber } from "@/utils/formatNumber";
 import { formatText } from "@/utils/formatText";
 import { formattedDate } from "@/utils/formatDate";
+import { getStatusStyles } from "@/utils/getStatusStyles";
 
 interface InvoiceCardProps {
   invoice: Partial<Invoice>;
 }
 
 const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
-  const statusStyle = () => {
-    switch (invoice?.status) {
-      case "PAID":
-        return { bg: "#dcf7ee", text: "#33D69F" };
-      case "PENDING":
-        return { bg: "#fdecd2", text: "#FF8F00" };
-      case "DRAFT":
-        return { bg: "#e4e4ea", text: "#373B53" };
-      default:
-        return { bg: "#e4e4ea", text: "#373B53" };
-    }
-  };
-
-  const renderStatus = statusStyle();
+  const statusStules = getStatusStyles(invoice.status);
 
   return (
     <div className="h-[134px] w-full mt-[6px] rounded shadow-md p-[24px] bg-white dark:bg-[#1E2139]">
@@ -41,14 +29,14 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
             Due {invoice?.paymentDate && formattedDate(invoice.paymentDate)}
           </p>
           <p className="text-[15px] font-bold dark:text-white">
-            &#8364; {invoice?.total && formatNumber(invoice?.total)}
+            £ {invoice?.total && formatNumber(invoice?.total)}
           </p>
         </div>
         <p
-          className={`h-[40px] w-[104px] flex justify-center items-center text-[15px] font-bold rounded bg-[${renderStatus.bg}] text-[${renderStatus.text}]`}
+          className={`h-[40px] w-[104px] flex justify-center items-center text-[15px] font-bold rounded ${statusStules.bg} ${statusStules.text} shadow-md`}
         >
           <span
-            className={`h-[8px] w-[8px] rounded bg-[${renderStatus.text}] mr-[8px] mb-[2px] shadow-md`}
+            className={`h-[8px] w-[8px] rounded  mr-[8px] mb-[3px] shadow-md ${statusStules.fill}`}
           ></span>
           {invoice.status && formatText(invoice.status)}
         </p>
