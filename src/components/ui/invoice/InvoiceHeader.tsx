@@ -61,7 +61,7 @@ const InvoiceHeader: FC<InvoiceHeaderProps> = ({ invoiceCount }) => {
   };
 
   return (
-    <div className="w-full h-[44px] flex justify-between items-center">
+    <div className="w-full h-[44px] md:h-[100px] flex justify-between items-center">
       <SlideOver open={open} setOpen={setOpen} />
       <div className="w-[50%]">
         <div className="text-[24px] font-bold color-[#0C0E16]">Invoices</div>
@@ -70,12 +70,12 @@ const InvoiceHeader: FC<InvoiceHeaderProps> = ({ invoiceCount }) => {
         </div>
       </div>
       <div className="w-[60%] flex justify-between">
-        <div className="relative flex justify-center items-center w-[50%]">
+        <div className="relative flex justify-end items-center w-[50%]">
           <p>Filter</p>
           <p className="hidden md:block ml-1">by status</p>
           <DropdownMenu />
         </div>
-        <div className="flex items-center w-[50%] ">
+        <div className="flex items-center w-[50%] justify-end">
           <div
             className="w-[90px] h-[44px] md:w-[150px] flex justify-around items-center rounded-full bg-[#7C5DFA]"
             onClick={() => setOpen(true)}

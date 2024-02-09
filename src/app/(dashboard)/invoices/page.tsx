@@ -28,7 +28,7 @@ const InvoicesPage: FC = async () => {
   const invoices = await getInvoices();
 
   return (
-    <div className="w-full px-[24px] pt-[30px] pb-[100px] bg-#F8F8FB dark:bg-[#141625]">
+    <div className="w-full px-[24px] pt-[30px] pb-[50px] bg-#F8F8FB dark:bg-[#141625]">
       <InvoiceHeader invoiceCount={invoices.length} />
       <InvoiceList invoices={invoices} />
     </div>

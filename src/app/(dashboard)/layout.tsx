@@ -1,4 +1,5 @@
 import { FC } from "react";
+import NavbarDesktop from "@/components/ui/nav/NavbarDesktop";
 import NavbarMobile from "@/components/ui/nav/NavbarMobile";
 
 type DashboardLayoutProps = {
@@ -8,8 +9,13 @@ type DashboardLayoutProps = {
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <div className="w-full h-full relative">
-      <NavbarMobile />
-      <div>{children}</div>
+      <NavbarDesktop />
+      <div className="flex justify-center">
+        <div className="max-w-[1024px] w-full">
+          <NavbarMobile />
+          <div>{children}</div>
+        </div>
+      </div>
     </div>
   );
 };

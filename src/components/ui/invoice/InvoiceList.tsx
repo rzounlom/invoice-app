@@ -51,7 +51,7 @@ interface InvoiceListProps {
 const InvoiceList: FC<InvoiceListProps> = ({ invoices }) => {
   if (!invoices.length) return <NoInvoices />;
   return (
-    <div className="mt-8">
+    <div className="mt-8 max-h-[700px] md:max-h-[900px]  xl:max-h-[730px] overflow-auto">
       {invoices.map((invoice) => (
         <div key={invoice.id}>
           <Link href={`/invoices/${invoice.id}`}>

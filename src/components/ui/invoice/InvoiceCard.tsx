@@ -14,7 +14,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
   const statusStules = getStatusStyles(invoice.status);
 
   return (
-    <div className="h-[134px] w-full mt-[15px] rounded shadow-md p-[24px] bg-white dark:bg-[#1E2139]">
+    <div className="h-[134px]  md:h-[72px] w-full mt-[15px] rounded shadow-md p-[24px] bg-white dark:bg-[#1E2139]">
       <div className="flex justify-between items-center h-full">
         <div className="flex flex-col md:flex-row md:items-center md:justify-around md:w-[55%] h-full justify-between">
           <p className="text-[15px] font-bold">
