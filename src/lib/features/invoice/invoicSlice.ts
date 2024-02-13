@@ -2,11 +2,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface IvoiceState {
-  filterStatus: "draft" | "paid" | "pending";
+  filterStatus: "all" | "draft" | "paid" | "pending";
 }
 
 const initialState: IvoiceState = {
-  filterStatus: "draft",
+  filterStatus: "all",
 };
 
 export const invoiceSlice = createSlice({
@@ -15,7 +15,7 @@ export const invoiceSlice = createSlice({
   reducers: {
     setFilterStatus: (
       state,
-      action: PayloadAction<"draft" | "paid" | "pending">
+      action: PayloadAction<"draft" | "paid" | "pending" | "all">
     ) => {
       state.filterStatus = action.payload;
     },
