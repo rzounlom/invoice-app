@@ -14,7 +14,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
   const statusStules = getStatusStyles(invoice.status);
 
   return (
-    <div className="h-[134px]  md:h-[72px] w-full mt-[15px] rounded shadow-md p-[24px] bg-white dark:bg-[#1E2139]">
+    <div className="h-[134px] first:mt-0  md:h-[72px] w-full mt-[15px] rounded shadow-md p-[24px] bg-white dark:bg-[#1E2139]">
       <div className="flex justify-between items-center h-full">
         <div className="flex flex-col md:flex-row md:items-center md:justify-around md:w-[55%] h-full justify-between">
           <p className="text-[15px] font-bold">
@@ -34,7 +34,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
           </p>
           <div className="flex items-center">
             <p
-              className={`border-2 border-black h-[40px] w-[104px] flex justify-center items-center text-[15px] font-bold rounded ${statusStules.bg} ${statusStules.text} shadow-md`}
+              className={`h-[40px] w-[104px] flex justify-center items-center text-[15px] font-bold rounded ${statusStules.bg} ${statusStules.text} shadow-md`}
             >
               <span
                 className={`h-[8px] w-[8px] rounded  mr-[8px] mb-[3px] shadow-md ${statusStules.fill}`}
