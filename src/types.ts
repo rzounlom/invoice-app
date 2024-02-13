@@ -1,5 +1,5 @@
 export type DropdownItem = {
   id: number;
-  name: "draft" | "pending" | "paid";
+  name: "draft" | "pending" | "paid" | "all";
   label: string;
 };
