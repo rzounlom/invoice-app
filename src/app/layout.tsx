@@ -1,6 +1,7 @@
 import "./globals.scss";
 
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { league_spartan } from "./ui/fonts";
 
 export const metadata: Metadata = {
@@ -17,8 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${league_spartan.className}`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${league_spartan.className}`}>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
