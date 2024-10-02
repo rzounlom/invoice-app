@@ -9,11 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "lavender-purple": "#7C5DFA",
+        "soft-violet": "#9277FF",
+        "midnight-navy": "#1E2139",
+        "deep-charcoal": "#252945",
+        "pale-periwinkle": "#DFE3FA",
+        "muted-slate": "#888EB0",
+        "cool-blue": "#7E88C3",
+        "jet-black": "#0C0E16",
+        "coral-red": "#EC5757",
+        "off-white": "#F8F8FB",
+        "dark-indigo": "#141625",
       },
     },
   },
+  darkMode: "class",
   plugins: [],
 };
 export default config;

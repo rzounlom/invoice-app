@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend Mentor - Pomodoro app solution
 
-## Getting Started
+This is a solution to the [Invoice app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQjl). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-First, run the development server:
+## Table of contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Screenshot
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![](/public/preview.jpg)
 
-## Learn More
+### Links
 
-To learn more about Next.js, take a look at the following resources:
+- Solution URL: (https://www.frontendmentor.io/solutions/vite-tailwind-css-pomodoro-app-KeD3XwipxG)
+- Live Site URL: (https://pomodoro-app-seven-azure.vercel.app/)
+- Gituhb Repo URL: (https://github.com/rzounlom/pomodoro-app)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## My process
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Built with
 
-## Deploy on Vercel
+- Semantic HTML5 markup
+- Flexbox
+- Mobile-first workflow
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### What I learned
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- How to use .ttf files with css
+- How to use css variables
+- How to change ol/ul colors
+
+### Continued development
+
+- Better workflow and design process before coding.
+- More structured layout procees.
+
+### Useful resources
+
+- [Vite starter guide](https://vitejs.dev/guide/) - How to setup a Vite project
+- [Tailwind css guide for Vite](https://tailwindcss.com/docs/guides/vite) - How to setup tailwind css with Vite
+- [Tailwind css theming](https://tailwindcss.com/docs/theme#customizing-the-default-theme) - How to extend default thems to add your own custom themes
+- [Classnames package](https://www.npmjs.com/package/classnames) - Docs for Classnames npm package to combine css clasnames
+- [Responsively App](https://responsively.app/download) - This app makes it easy to view multiple device layouts at once.
+- [Kumbh Sans font](https://fonts.google.com/specimen/Kumbh+Sans) - Google Font url for Kumbh Sans font
+- [Space Mono font](https://fonts.google.com/specimen/Space+Mono) - Google Font url for Space Mono font
+- [Roboto Slab font](https://fonts.google.com/specimen/Roboto+Slab) - Google Font url for Roboto Slab font
+NOTE: you can combine all the Google fonts into one import url into your .css file using the @import decorator file: @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Roboto+Slab:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+OR You can add the fonts in your index.html file using the link tag:
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Roboto+Slab:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+## Author
+
+- Github - [Romaric Zounlome](https://github.com/rzounlom)
+- Frontend Mentor - [@rzounlom](https://www.frontendmentor.io/profile/rzounlom)
