@@ -2,12 +2,12 @@ import { FC } from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Dashboard",
+  title: "Invoices",
+  description: "Invoices",
 };
 
 const Home: FC = () => {
-  return <div>Dashboard</div>;
+  return <div>Invoices</div>;
 };
 
 export default Home;
