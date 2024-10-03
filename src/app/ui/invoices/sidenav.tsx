@@ -10,13 +10,13 @@ const SideNav: FC = () => {
 
   if (!mounted)
     return (
-      <div className="h-[103px] w-full xl:w-[103px] xl:h-[100vh] bg-pale-navy"></div>
+      <div className="h-[103px] w-full xl:w-[103px] xl:h-screen bg-pale-navy"></div>
     );
 
   return (
     <div
       className={clsx(
-        "h-[80px] w-full flex justify-between items-center xl:w-[103px] xl:h-[100vh] xl:flex-col",
+        "h-[80px] w-full flex justify-between items-center xl:w-[103px] xl:h-full xl:flex-col",
         {
           "dark:bg-midnight-navy": theme === "dark",
           "bg-pale-navy": theme === "light",
@@ -57,8 +57,8 @@ const SideNav: FC = () => {
         <div className="h-full w-[50%] flex justify-center items-center border-r-[.5px] border-muted-navy xl:w-full xl:h-[50%] xl:border-b-[.5px]">
           <Image
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            src={theme === "dark" ? "/icon-sun.svg" : "icon-moon.svg"}
-            alt="them icon"
+            src={theme === "dark" ? "/icon-sun.svg" : "/icon-moon.svg"}
+            alt="theme icon"
             height={20}
             width={20}
           />
@@ -68,7 +68,7 @@ const SideNav: FC = () => {
             className="rounded-full"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             src="/image-avatar.jpg"
-            alt="them icon"
+            alt="theme icon"
             height={32}
             width={32}
           />

@@ -1,24 +1,30 @@
 "use client";
 
-import { FC } from "react";
+import { FC, ReactNode } from "react";
+
 import clsx from "clsx";
 import useMountedTheme from "../hooks/use-mounted-themes";
 
-interface InvoiceMainProps {}
+interface InvoiceMainProps {
+  children?: ReactNode;
+}
 
-const InvoiceMain: FC<InvoiceMainProps> = ({}) => {
+const InvoiceMain: FC<InvoiceMainProps> = ({ children }) => {
   const { mounted, theme } = useMountedTheme();
 
   if (!mounted) return <div className="w-full h-full bg-off-white"></div>;
 
   return (
     <div
-      className={clsx("w-full h-full", {
-        "dark:bg-dark-indigo": theme === "dark",
-        "bg-off-white": theme === "light",
-      })}
+      className={clsx(
+        "w-full h-[100vh] overflow-auto  p-[24px] md:p-[48px] flex flex-col items-center",
+        {
+          "dark:bg-dark-indigo": theme === "dark",
+          "bg-off-white": theme === "light",
+        }
+      )}
     >
-      invoices-main
+      {children}
     </div>
   );
 };
