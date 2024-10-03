@@ -1,9 +1,14 @@
+import SideNav from "../ui/invoices/sidenav";
+
 export const experimental_ppr = true;
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      {children}
+    <div className="flex flex-col xl:flex-row">
+      <div>
+        <SideNav />
+      </div>
+      <div>{children}</div>
     </div>
   );
 }
