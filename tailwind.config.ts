@@ -12,6 +12,8 @@ const config: Config = {
         "lavender-purple": "#7C5DFA",
         "soft-violet": "#9277FF",
         "midnight-navy": "#1E2139",
+        "pale-navy": "#373B53",
+        "muted-navy": "#494E6E",
         "deep-charcoal": "#252945",
         "pale-periwinkle": "#DFE3FA",
         "muted-slate": "#888EB0",
