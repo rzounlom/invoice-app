@@ -19,7 +19,7 @@ const InvoiceMain: FC<InvoiceMainProps> = ({ children }) => {
       className={clsx(
         "w-full h-[100vh] overflow-auto  p-[24px] md:p-[48px] flex flex-col items-center",
         {
-          "dark:bg-dark-indigo": theme === "dark",
+          "bg-dark-indigo": theme === "dark",
           "bg-off-white": theme === "light",
         }
       )}

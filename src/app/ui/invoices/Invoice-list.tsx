@@ -1,326 +1,182 @@
-import { FC } from "react";
+"use client";
+
+import "./invoice-list.scss";
+
+import { FC, useState } from "react";
+
 import Image from "next/image";
 import { Invoice } from "@/app/types";
+import InvoiceCard from "./invoice-card";
+import clsx from "clsx";
+import useMountedTheme from "../hooks/use-mounted-themes";
 
 interface InvoiceLIstProps {
   invoices: Invoice[];
 }
 
 const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
-  console.log(invoices);
+  const { theme } = useMountedTheme();
+  const [filteredInvoices, setFilteredInvoices] = useState<Invoice[]>(invoices);
+  const [filter, setFilter] = useState({
+    draft: false,
+    paid: false,
+    pending: false,
+  });
+
+  const [toggleFilter, setToggleFilter] = useState<boolean>(false);
+
+  const handleToggleFilter = () => setToggleFilter(!toggleFilter);
+
+  const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    // Update the filter state based on the checkbox change
+    const updatedFilter = { ...filter, [name]: checked };
+    setFilter(updatedFilter);
+
+    // Determine if any filter is active
+    const isAnyFilterActive = Object.values(updatedFilter).some(
+      (value) => value
+    );
+
+    // Filter the invoices based on the updated filter state
+    const filtered = invoices.filter((invoice) => {
+      // If no filter is active, return all invoices
+      if (!isAnyFilterActive) {
+        return true;
+      }
+      // Otherwise, filter based on the active filters
+      if (updatedFilter.draft && invoice.status === "draft") {
+        return true;
+      }
+      if (updatedFilter.paid && invoice.status === "paid") {
+        return true;
+      }
+      if (updatedFilter.pending && invoice.status === "pending") {
+        return true;
+      }
+      return false;
+    });
+
+    // Update the filtered invoices state
+    setFilteredInvoices(filtered);
+  };
+
   return (
-    <div className="border h-auto w-full max-w-[730px]">
-      <div>
-        <div>
-          <p>Invoices</p>
-          <p>{invoices.length ? invoices.length : "No"} invoices</p>
+    <div className="h-auto w-full max-w-[730px]">
+      <div className="w-full h-[44px] lg:h-[48px] flex items-center relative">
+        <div className="w-[50%] h-full flex flex-col justify-center">
+          <p className="text-[24px] font-bold">Invoices</p>
+          <p className="text-muted-slate text-[13px]">
+            {invoices.length ? invoices.length : "No"} invoices
+          </p>
         </div>
-        <div>
-          Filter{" "}
-          <Image
-            src="/icon-arrow-down.svg"
-            alt="arrow down icon"
-            height={4}
-            width={8}
-          />
+        <div className="flex w-[50%] h-full justify-between relative">
+          <div
+            className={clsx(
+              "h-[128px] w-[192px] flex flex-col justify-center absolute p-[24px]  mt-[48px] right-[30%] lg:right-[55%] rounded-[8px] shadow-xl transition-opacity duration-300",
+              {
+                "opacity-0 pointer-events-none": !toggleFilter, // Hide the element smoothly
+                "opacity-100 pointer-events-auto": toggleFilter, // Show the element smoothly
+                "bg-deep-charcoal": theme === "dark",
+                "bg-white": theme === "light",
+              }
+            )}
+          >
+            <div
+              className={clsx("w-full flex items-center", {
+                "text-white": theme === "dark",
+                "text-midnight-navy": theme === "light",
+              })}
+            >
+              <div>
+                <input
+                  name="draft"
+                  type="checkbox"
+                  checked={filter.draft}
+                  className="appearance-none custom-checkbox h-[16px] w-[16px] border border-lavender-purple rounded-[2px] bg-pale-periwinkle checked:bg-lavender-purple checked:border-transparent focus:outline-none"
+                  onChange={handleFilter}
+                />
+              </div>
+              <p className="ml-[13px]">Draft</p>
+            </div>
+            <div
+              className={clsx("w-full flex items-center", {
+                "text-white": theme === "dark",
+                "text-midnight-navy": theme === "light",
+              })}
+            >
+              <div>
+                <input
+                  name="pending"
+                  type="checkbox"
+                  checked={filter.pending}
+                  className="appearance-none custom-checkbox h-[16px] w-[16px] border border-lavender-purple rounded-[2px] bg-pale-periwinkle checked:bg-lavender-purple checked:border-transparent focus:outline-none"
+                  onChange={handleFilter}
+                />
+              </div>
+              <p className="ml-[13px]">Pending</p>
+            </div>
+            <div
+              className={clsx("w-full flex items-center", {
+                "text-white": theme === "dark",
+                "text-midnight-navy": theme === "light",
+              })}
+            >
+              <div>
+                <input
+                  name="paid"
+                  type="checkbox"
+                  checked={filter.paid}
+                  className="appearance-none custom-checkbox h-[16px] w-[16px] border border-lavender-purple rounded-[2px] bg-pale-periwinkle checked:bg-lavender-purple checked:border-transparent focus:outline-none"
+                  onChange={handleFilter}
+                />
+              </div>
+              <p className="ml-[13px]">Paid</p>
+            </div>
+          </div>
+          <div
+            className="flex w-[53px] lg:w-[200px] items-center hover:cursor-pointer"
+            onClick={handleToggleFilter}
+          >
+            <p className="text-[15px] font-bold lg:hidden">Filter</p>
+            <p className="text-[15px] font-bold hidden lg:block">
+              Filter by status
+            </p>
+            <div className="ml-[12px] ">
+              <Image
+                className="scale-[2]"
+                src={
+                  toggleFilter ? "/icon-arrow-up.svg" : "/icon-arrow-down.svg"
+                }
+                alt="arrow down icon"
+                height={4}
+                width={8}
+              />
+            </div>
+          </div>
+
+          <div className="w-[90px] lg:w-[150px] h-full hover:cursor-pointer">
+            <button className="h-full w-full  flex items-center justify-between p-[6px] rounded-[24px] bg-lavender-purple text-white">
+              <div className="h-[32px] w-[32px] bg-white rounded-full flex items-center justify-center text-lavender-purple">
+                <Image
+                  src="/icon-plus.svg"
+                  height={12}
+                  width={12}
+                  alt="plus icon"
+                />
+              </div>
+              <p className="mr-[8px] font-bold text-[15px] lg:hidden">New</p>
+              <p className="mr-[8px] font-bold text-[15px] hidden lg:block">
+                New Invoice
+              </p>
+            </button>
+          </div>
         </div>
-        <div>Button</div>
-        <div>
-          I'm baby bespoke umami iPhone adaptogen hell of. Food truck franzen
-          blue bottle, salvia same everyday carry hammock jawn yes plz etsy
-          meditation VHS. Scenester crucifix fit hell of chicharrones tbh
-          hexagon gentrify bushwick occupy. Retro bitters asymmetrical you
-          probably haven't heard of them tonx pok pok sriracha venmo
-          vibecession. Butcher knausgaard truffaut, street art food truck subway
-          tile mukbang dreamcatcher health goth listicle bruh selvage tote bag
-          fashion axe drinking vinegar. Jean shorts mlkshk pok pok cred. Fanny
-          pack cred slow-carb raclette, blue bottle poutine mumblecore umami
-          poke keffiyeh. Wayfarers raw denim solarpunk ascot. Four dollar toast
-          praxis cardigan pok pok lyft irony air plant brunch readymade hot
-          chicken vaporware microdosing kinfolk forage. Brunch big mood
-          distillery, vice YOLO man braid hot chicken locavore raclette
-          farm-to-table affogato succulents yuccie. Adaptogen gluten-free
-          whatever, keytar copper mug pok pok banh mi photo booth cred blackbird
-          spyplane yuccie. Mumblecore kinfolk kickstarter kitsch pug whatever
-          cray venmo. Lo-fi gastropub pok pok, man braid butcher twee chillwave
-          solarpunk pinterest etsy beard meh chartreuse distillery. Four dollar
-          toast synth meditation hella poke, YOLO hell of vaporware JOMO
-          humblebrag. Enamel pin jianbing vape poke, skateboard hexagon man
-          braid hoodie tofu. Pitchfork art party tumblr, direct trade polaroid
-          authentic shaman chillwave normcore cloud bread. Flannel celiac
-          Brooklyn, cray roof party DSA man bun helvetica. Gochujang truffaut
-          keytar schlitz small batch literally narwhal chillwave distillery
-          health goth. Venmo keytar squid wayfarers small batch live-edge
-          pinterest pug typewriter iPhone fit. Occupy meditation tumblr vinyl
-          pop-up squid. 8-bit venmo bruh wolf humblebrag twee pitchfork gatekeep
-          wayfarers williamsburg grailed gluten-free quinoa ugh chia. Humblebrag
-          messenger bag +1 typewriter woke solarpunk, neutra literally pickled
-          air plant. Kombucha blackbird spyplane affogato hell of tonx mlkshk.
-          8-bit vexillologist twee, shoreditch man braid tofu slow-carb. Before
-          they sold out pop-up ramps DIY YOLO cliche. Marfa jawn la croix, green
-          juice typewriter bruh lo-fi hell of tumeric cupping tilde synth
-          shoreditch tacos cred. Neutra blue bottle adaptogen ennui hammock meh
-          shoreditch iPhone williamsburg gorpcore. Stumptown fit hoodie,
-          jianbing roof party selfies raw denim squid shaman cray. Vinyl
-          waistcoat quinoa irony intelligentsia pinterest. Green juice hammock
-          raw denim poutine before they sold out distillery, marfa activated
-          charcoal chartreuse yes plz YOLO organic hashtag. Wolf edison bulb
-          cray franzen fingerstache. +1 bodega boys yes plz gluten-free. Pop-up
-          kinfolk subway tile mumblecore lyft swag air plant XOXO cliche
-          wayfarers adaptogen craft beer. Asymmetrical sus tacos +1 gastropub
-          XOXO celiac lumbersexual pop-up typewriter bushwick helvetica small
-          batch green juice. Lo-fi taiyaki fixie affogato, everyday carry jawn
-          thundercats leggings raclette. Yuccie pinterest biodiesel, organic
-          glossier 8-bit cray small batch craft beer gentrify semiotics. Godard
-          intelligentsia bespoke cred, vinyl tousled tattooed XOXO pinterest
-          copper mug pour-over typewriter church-key. Knausgaard gorpcore austin
-          sus normcore bodega boys seitan same hexagon readymade selvage
-          biodiesel. Cupping banh mi fashion axe gastropub lyft, yuccie unicorn
-          listicle organic. Keytar ugh subway tile, mlkshk austin actually ennui
-          tofu bodega boys distillery kogi truffaut pinterest pork belly. Neutra
-          venmo pop-up vinyl, tacos copper mug 3 wolf moon tilde lumbersexual.
-          Next level DSA pug, palo santo you probably haven't heard of them
-          fanny pack chicharrones subway tile marfa slow-carb. Bitters wayfarers
-          twee literally offal migas kitsch master cleanse pabst ascot pork
-          belly. Next level jianbing bespoke tumblr, health goth cloud bread
-          ennui selvage taiyaki plaid. 3 wolf moon four dollar toast listicle
-          offal fam etsy plaid raw denim next level banh mi intelligentsia.
-          Post-ironic crucifix pabst sustainable VHS pug locavore iceland.
-          Brooklyn vaporware enamel pin glossier pug master cleanse DSA woke
-          everyday carry vibecession craft beer crucifix iPhone 3 wolf moon.
-          Helvetica schlitz cold-pressed, gatekeep raw denim listicle truffaut
-          subway tile freegan vape hell of readymade leggings. Brooklyn ennui
-          next level vibecession, twee synth echo park tumeric umami photo booth
-          hoodie mustache bicycle rights blue bottle. Enamel pin craft beer tbh
-          fixie tofu vape vexillologist gatekeep glossier. Gorpcore selvage
-          williamsburg prism pour-over drinking vinegar. Heirloom shabby chic
-          XOXO knausgaard gatekeep swag. Cardigan stumptown tumblr jean shorts.
-          Fingerstache ascot fam palo santo vegan. Neutral milk hotel tousled
-          90's vibecession hexagon kogi woke artisan chambray selvage ascot
-          paleo. Vice hot chicken activated charcoal hoodie mukbang neutra XOXO
-          cronut 90's street art tilde tote bag quinoa artisan bushwick. Dummy
-          text? More like dummy thicc text, amirite?I'm baby bespoke umami
-          iPhone adaptogen hell of. Food truck franzen blue bottle, salvia same
-          everyday carry hammock jawn yes plz etsy meditation VHS. Scenester
-          crucifix fit hell of chicharrones tbh hexagon gentrify bushwick
-          occupy. Retro bitters asymmetrical you probably haven't heard of them
-          tonx pok pok sriracha venmo vibecession. Butcher knausgaard truffaut,
-          street art food truck subway tile mukbang dreamcatcher health goth
-          listicle bruh selvage tote bag fashion axe drinking vinegar. Jean
-          shorts mlkshk pok pok cred. Fanny pack cred slow-carb raclette, blue
-          bottle poutine mumblecore umami poke keffiyeh. Wayfarers raw denim
-          solarpunk ascot. Four dollar toast praxis cardigan pok pok lyft irony
-          air plant brunch readymade hot chicken vaporware microdosing kinfolk
-          forage. Brunch big mood distillery, vice YOLO man braid hot chicken
-          locavore raclette farm-to-table affogato succulents yuccie. Adaptogen
-          gluten-free whatever, keytar copper mug pok pok banh mi photo booth
-          cred blackbird spyplane yuccie. Mumblecore kinfolk kickstarter kitsch
-          pug whatever cray venmo. Lo-fi gastropub pok pok, man braid butcher
-          twee chillwave solarpunk pinterest etsy beard meh chartreuse
-          distillery. Four dollar toast synth meditation hella poke, YOLO hell
-          of vaporware JOMO humblebrag. Enamel pin jianbing vape poke,
-          skateboard hexagon man braid hoodie tofu. Pitchfork art party tumblr,
-          direct trade polaroid authentic shaman chillwave normcore cloud bread.
-          Flannel celiac Brooklyn, cray roof party DSA man bun helvetica.
-          Gochujang truffaut keytar schlitz small batch literally narwhal
-          chillwave distillery health goth. Venmo keytar squid wayfarers small
-          batch live-edge pinterest pug typewriter iPhone fit. Occupy meditation
-          tumblr vinyl pop-up squid. 8-bit venmo bruh wolf humblebrag twee
-          pitchfork gatekeep wayfarers williamsburg grailed gluten-free quinoa
-          ugh chia. Humblebrag messenger bag +1 typewriter woke solarpunk,
-          neutra literally pickled air plant. Kombucha blackbird spyplane
-          affogato hell of tonx mlkshk. 8-bit vexillologist twee, shoreditch man
-          braid tofu slow-carb. Before they sold out pop-up ramps DIY YOLO
-          cliche. Marfa jawn la croix, green juice typewriter bruh lo-fi hell of
-          tumeric cupping tilde synth shoreditch tacos cred. Neutra blue bottle
-          adaptogen ennui hammock meh shoreditch iPhone williamsburg gorpcore.
-          Stumptown fit hoodie, jianbing roof party selfies raw denim squid
-          shaman cray. Vinyl waistcoat quinoa irony intelligentsia pinterest.
-          Green juice hammock raw denim poutine before they sold out distillery,
-          marfa activated charcoal chartreuse yes plz YOLO organic hashtag. Wolf
-          edison bulb cray franzen fingerstache. +1 bodega boys yes plz
-          gluten-free. Pop-up kinfolk subway tile mumblecore lyft swag air plant
-          XOXO cliche wayfarers adaptogen craft beer. Asymmetrical sus tacos +1
-          gastropub XOXO celiac lumbersexual pop-up typewriter bushwick
-          helvetica small batch green juice. Lo-fi taiyaki fixie affogato,
-          everyday carry jawn thundercats leggings raclette. Yuccie pinterest
-          biodiesel, organic glossier 8-bit cray small batch craft beer gentrify
-          semiotics. Godard intelligentsia bespoke cred, vinyl tousled tattooed
-          XOXO pinterest copper mug pour-over typewriter church-key. Knausgaard
-          gorpcore austin sus normcore bodega boys seitan same hexagon readymade
-          selvage biodiesel. Cupping banh mi fashion axe gastropub lyft, yuccie
-          unicorn listicle organic. Keytar ugh subway tile, mlkshk austin
-          actually ennui tofu bodega boys distillery kogi truffaut pinterest
-          pork belly. Neutra venmo pop-up vinyl, tacos copper mug 3 wolf moon
-          tilde lumbersexual. Next level DSA pug, palo santo you probably
-          haven't heard of them fanny pack chicharrones subway tile marfa
-          slow-carb. Bitters wayfarers twee literally offal migas kitsch master
-          cleanse pabst ascot pork belly. Next level jianbing bespoke tumblr,
-          health goth cloud bread ennui selvage taiyaki plaid. 3 wolf moon four
-          dollar toast listicle offal fam etsy plaid raw denim next level banh
-          mi intelligentsia. Post-ironic crucifix pabst sustainable VHS pug
-          locavore iceland. Brooklyn vaporware enamel pin glossier pug master
-          cleanse DSA woke everyday carry vibecession craft beer crucifix iPhone
-          3 wolf moon. Helvetica schlitz cold-pressed, gatekeep raw denim
-          listicle truffaut subway tile freegan vape hell of readymade leggings.
-          Brooklyn ennui next level vibecession, twee synth echo park tumeric
-          umami photo booth hoodie mustache bicycle rights blue bottle. Enamel
-          pin craft beer tbh fixie tofu vape vexillologist gatekeep glossier.
-          Gorpcore selvage williamsburg prism pour-over drinking vinegar.
-          Heirloom shabby chic XOXO knausgaard gatekeep swag. Cardigan stumptown
-          tumblr jean shorts. Fingerstache ascot fam palo santo vegan. Neutral
-          milk hotel tousled 90's vibecession hexagon kogi woke artisan chambray
-          selvage ascot paleo. Vice hot chicken activated charcoal hoodie
-          mukbang neutra XOXO cronut 90's street art tilde tote bag quinoa
-          artisan bushwick. Dummy text? More like dummy thicc text, amirite?I'm
-          baby bespoke umami iPhone adaptogen hell of. Food truck franzen blue
-          bottle, salvia same everyday carry hammock jawn yes plz etsy
-          meditation VHS. Scenester crucifix fit hell of chicharrones tbh
-          hexagon gentrify bushwick occupy. Retro bitters asymmetrical you
-          probably haven't heard of them tonx pok pok sriracha venmo
-          vibecession. Butcher knausgaard truffaut, street art food truck subway
-          tile mukbang dreamcatcher health goth listicle bruh selvage tote bag
-          fashion axe drinking vinegar. Jean shorts mlkshk pok pok cred. Fanny
-          pack cred slow-carb raclette, blue bottle poutine mumblecore umami
-          poke keffiyeh. Wayfarers raw denim solarpunk ascot. Four dollar toast
-          praxis cardigan pok pok lyft irony air plant brunch readymade hot
-          chicken vaporware microdosing kinfolk forage. Brunch big mood
-          distillery, vice YOLO man braid hot chicken locavore raclette
-          farm-to-table affogato succulents yuccie. Adaptogen gluten-free
-          whatever, keytar copper mug pok pok banh mi photo booth cred blackbird
-          spyplane yuccie. Mumblecore kinfolk kickstarter kitsch pug whatever
-          cray venmo. Lo-fi gastropub pok pok, man braid butcher twee chillwave
-          solarpunk pinterest etsy beard meh chartreuse distillery. Four dollar
-          toast synth meditation hella poke, YOLO hell of vaporware JOMO
-          humblebrag. Enamel pin jianbing vape poke, skateboard hexagon man
-          braid hoodie tofu. Pitchfork art party tumblr, direct trade polaroid
-          authentic shaman chillwave normcore cloud bread. Flannel celiac
-          Brooklyn, cray roof party DSA man bun helvetica. Gochujang truffaut
-          keytar schlitz small batch literally narwhal chillwave distillery
-          health goth. Venmo keytar squid wayfarers small batch live-edge
-          pinterest pug typewriter iPhone fit. Occupy meditation tumblr vinyl
-          pop-up squid. 8-bit venmo bruh wolf humblebrag twee pitchfork gatekeep
-          wayfarers williamsburg grailed gluten-free quinoa ugh chia. Humblebrag
-          messenger bag +1 typewriter woke solarpunk, neutra literally pickled
-          air plant. Kombucha blackbird spyplane affogato hell of tonx mlkshk.
-          8-bit vexillologist twee, shoreditch man braid tofu slow-carb. Before
-          they sold out pop-up ramps DIY YOLO cliche. Marfa jawn la croix, green
-          juice typewriter bruh lo-fi hell of tumeric cupping tilde synth
-          shoreditch tacos cred. Neutra blue bottle adaptogen ennui hammock meh
-          shoreditch iPhone williamsburg gorpcore. Stumptown fit hoodie,
-          jianbing roof party selfies raw denim squid shaman cray. Vinyl
-          waistcoat quinoa irony intelligentsia pinterest. Green juice hammock
-          raw denim poutine before they sold out distillery, marfa activated
-          charcoal chartreuse yes plz YOLO organic hashtag. Wolf edison bulb
-          cray franzen fingerstache. +1 bodega boys yes plz gluten-free. Pop-up
-          kinfolk subway tile mumblecore lyft swag air plant XOXO cliche
-          wayfarers adaptogen craft beer. Asymmetrical sus tacos +1 gastropub
-          XOXO celiac lumbersexual pop-up typewriter bushwick helvetica small
-          batch green juice. Lo-fi taiyaki fixie affogato, everyday carry jawn
-          thundercats leggings raclette. Yuccie pinterest biodiesel, organic
-          glossier 8-bit cray small batch craft beer gentrify semiotics. Godard
-          intelligentsia bespoke cred, vinyl tousled tattooed XOXO pinterest
-          copper mug pour-over typewriter church-key. Knausgaard gorpcore austin
-          sus normcore bodega boys seitan same hexagon readymade selvage
-          biodiesel. Cupping banh mi fashion axe gastropub lyft, yuccie unicorn
-          listicle organic. Keytar ugh subway tile, mlkshk austin actually ennui
-          tofu bodega boys distillery kogi truffaut pinterest pork belly. Neutra
-          venmo pop-up vinyl, tacos copper mug 3 wolf moon tilde lumbersexual.
-          Next level DSA pug, palo santo you probably haven't heard of them
-          fanny pack chicharrones subway tile marfa slow-carb. Bitters wayfarers
-          twee literally offal migas kitsch master cleanse pabst ascot pork
-          belly. Next level jianbing bespoke tumblr, health goth cloud bread
-          ennui selvage taiyaki plaid. 3 wolf moon four dollar toast listicle
-          offal fam etsy plaid raw denim next level banh mi intelligentsia.
-          Post-ironic crucifix pabst sustainable VHS pug locavore iceland.
-          Brooklyn vaporware enamel pin glossier pug master cleanse DSA woke
-          everyday carry vibecession craft beer crucifix iPhone 3 wolf moon.
-          Helvetica schlitz cold-pressed, gatekeep raw denim listicle truffaut
-          subway tile freegan vape hell of readymade leggings. Brooklyn ennui
-          next level vibecession, twee synth echo park tumeric umami photo booth
-          hoodie mustache bicycle rights blue bottle. Enamel pin craft beer tbh
-          fixie tofu vape vexillologist gatekeep glossier. Gorpcore selvage
-          williamsburg prism pour-over drinking vinegar. Heirloom shabby chic
-          XOXO knausgaard gatekeep swag. Cardigan stumptown tumblr jean shorts.
-          Fingerstache ascot fam palo santo vegan. Neutral milk hotel tousled
-          90's vibecession hexagon kogi woke artisan chambray selvage ascot
-          paleo. Vice hot chicken activated charcoal hoodie mukbang neutra XOXO
-          cronut 90's street art tilde tote bag quinoa artisan bushwick. Dummy
-          text? More like dummy thicc text, amirite?I'm baby bespoke umami
-          iPhone adaptogen hell of. Food truck franzen blue bottle, salvia same
-          everyday carry hammock jawn yes plz etsy meditation VHS. Scenester
-          crucifix fit hell of chicharrones tbh hexagon gentrify bushwick
-          occupy. Retro bitters asymmetrical you probably haven't heard of them
-          tonx pok pok sriracha venmo vibecession. Butcher knausgaard truffaut,
-          street art food truck subway tile mukbang dreamcatcher health goth
-          listicle bruh selvage tote bag fashion axe drinking vinegar. Jean
-          shorts mlkshk pok pok cred. Fanny pack cred slow-carb raclette, blue
-          bottle poutine mumblecore umami poke keffiyeh. Wayfarers raw denim
-          solarpunk ascot. Four dollar toast praxis cardigan pok pok lyft irony
-          air plant brunch readymade hot chicken vaporware microdosing kinfolk
-          forage. Brunch big mood distillery, vice YOLO man braid hot chicken
-          locavore raclette farm-to-table affogato succulents yuccie. Adaptogen
-          gluten-free whatever, keytar copper mug pok pok banh mi photo booth
-          cred blackbird spyplane yuccie. Mumblecore kinfolk kickstarter kitsch
-          pug whatever cray venmo. Lo-fi gastropub pok pok, man braid butcher
-          twee chillwave solarpunk pinterest etsy beard meh chartreuse
-          distillery. Four dollar toast synth meditation hella poke, YOLO hell
-          of vaporware JOMO humblebrag. Enamel pin jianbing vape poke,
-          skateboard hexagon man braid hoodie tofu. Pitchfork art party tumblr,
-          direct trade polaroid authentic shaman chillwave normcore cloud bread.
-          Flannel celiac Brooklyn, cray roof party DSA man bun helvetica.
-          Gochujang truffaut keytar schlitz small batch literally narwhal
-          chillwave distillery health goth. Venmo keytar squid wayfarers small
-          batch live-edge pinterest pug typewriter iPhone fit. Occupy meditation
-          tumblr vinyl pop-up squid. 8-bit venmo bruh wolf humblebrag twee
-          pitchfork gatekeep wayfarers williamsburg grailed gluten-free quinoa
-          ugh chia. Humblebrag messenger bag +1 typewriter woke solarpunk,
-          neutra literally pickled air plant. Kombucha blackbird spyplane
-          affogato hell of tonx mlkshk. 8-bit vexillologist twee, shoreditch man
-          braid tofu slow-carb. Before they sold out pop-up ramps DIY YOLO
-          cliche. Marfa jawn la croix, green juice typewriter bruh lo-fi hell of
-          tumeric cupping tilde synth shoreditch tacos cred. Neutra blue bottle
-          adaptogen ennui hammock meh shoreditch iPhone williamsburg gorpcore.
-          Stumptown fit hoodie, jianbing roof party selfies raw denim squid
-          shaman cray. Vinyl waistcoat quinoa irony intelligentsia pinterest.
-          Green juice hammock raw denim poutine before they sold out distillery,
-          marfa activated charcoal chartreuse yes plz YOLO organic hashtag. Wolf
-          edison bulb cray franzen fingerstache. +1 bodega boys yes plz
-          gluten-free. Pop-up kinfolk subway tile mumblecore lyft swag air plant
-          XOXO cliche wayfarers adaptogen craft beer. Asymmetrical sus tacos +1
-          gastropub XOXO celiac lumbersexual pop-up typewriter bushwick
-          helvetica small batch green juice. Lo-fi taiyaki fixie affogato,
-          everyday carry jawn thundercats leggings raclette. Yuccie pinterest
-          biodiesel, organic glossier 8-bit cray small batch craft beer gentrify
-          semiotics. Godard intelligentsia bespoke cred, vinyl tousled tattooed
-          XOXO pinterest copper mug pour-over typewriter church-key. Knausgaard
-          gorpcore austin sus normcore bodega boys seitan same hexagon readymade
-          selvage biodiesel. Cupping banh mi fashion axe gastropub lyft, yuccie
-          unicorn listicle organic. Keytar ugh subway tile, mlkshk austin
-          actually ennui tofu bodega boys distillery kogi truffaut pinterest
-          pork belly. Neutra venmo pop-up vinyl, tacos copper mug 3 wolf moon
-          tilde lumbersexual. Next level DSA pug, palo santo you probably
-          haven't heard of them fanny pack chicharrones subway tile marfa
-          slow-carb. Bitters wayfarers twee literally offal migas kitsch master
-          cleanse pabst ascot pork belly. Next level jianbing bespoke tumblr,
-          health goth cloud bread ennui selvage taiyaki plaid. 3 wolf moon four
-          dollar toast listicle offal fam etsy plaid raw denim next level banh
-          mi intelligentsia. Post-ironic crucifix pabst sustainable VHS pug
-          locavore iceland. Brooklyn vaporware enamel pin glossier pug master
-          cleanse DSA woke everyday carry vibecession craft beer crucifix iPhone
-          3 wolf moon. Helvetica schlitz cold-pressed, gatekeep raw denim
-          listicle truffaut subway tile freegan vape hell of readymade leggings.
-          Brooklyn ennui next level vibecession, twee synth echo park tumeric
-          umami photo booth hoodie mustache bicycle rights blue bottle. Enamel
-          pin craft beer tbh fixie tofu vape vexillologist gatekeep glossier.
-          Gorpcore selvage williamsburg prism pour-over drinking vinegar.
-          Heirloom shabby chic XOXO knausgaard gatekeep swag. Cardigan stumptown
-          tumblr jean shorts. Fingerstache ascot fam palo santo vegan. Neutral
-          milk hotel tousled 90's vibecession hexagon kogi woke artisan chambray
-          selvage ascot paleo. Vice hot chicken activated charcoal hoodie
-          mukbang neutra XOXO cronut 90's street art tilde tote bag quinoa
-          artisan bushwick. Dummy text? More like dummy thicc text, amirite?
-        </div>
+      </div>
+      <div className="mt-[30px] mb-[100px]">
+        {filteredInvoices.map((invoice) => (
+          <InvoiceCard key={invoice.id} invoice={invoice} />
+        ))}
       </div>
     </div>
   );
