@@ -1,31 +1,17 @@
-"use client";
-
 import { FC } from "react";
 import { Invoice } from "@/app/types";
 import StatusCard from "./status-card";
-import clsx from "clsx";
 import { formatCurrency } from "@/lib/utils/format-currency";
 import { formatDate } from "@/lib/utils/format-date";
-import useMountedTheme from "../hooks/use-mounted-themes";
 
 interface InvoiceCardProps {
   invoice: Invoice;
 }
 
 const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
-  const { theme } = useMountedTheme();
-
   return (
     <>
-      <div
-        className={clsx(
-          "hidden md:block border-t border-b border-midnight-navy w-full h-[72px] flex items-center justify-between",
-          {
-            "bg-midnight-navy": theme === "dark",
-            "bg-off-white": theme === "light",
-          }
-        )}
-      >
+      <div className="hidden md:block border-t border-b border-midnight-navy w-full h-[72px] flex items-center justify-between bg-off-white dark:bg-midnight-navy">
         <div className="flex items-center w-[33%] h-full">
           <p className="text-[15px] ml-[24px]">{invoice.id}</p>
         </div>
@@ -36,19 +22,11 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
           <p className="text-[15px]">{invoice.status}</p>
         </div>
       </div>
-      <div
-        className={clsx(
-          "md:hidden w-full h-[134px] flex items-center justify-between rounded-[8px] shadow-md mt-[16px] px-[24px] py-[25px]",
-          {
-            "bg-midnight-navy": theme === "dark",
-            "bg-white": theme === "light",
-          }
-        )}
-      >
+      <div className="md:hidden w-full h-[134px] flex items-center justify-between rounded-[8px] shadow-md mt-[16px] px-[24px] py-[25px] bg-white dark:bg-midnight-navy">
         <div className="flex flex-col justify-between items-start w-[50%] h-full text-[15px]">
           <p className="font-bold tracking-[-.25px] leading[15px]">
             <span className="text-muted-slate">#</span>
-            <span className="text-jet-black">{invoice.id}</span>
+            <span className="text-jet-black dark:text-white">{invoice.id}</span>
           </p>
           <p className="flex text-[13px] tracking-[-.1px] leading[15px]">
             <span className="font-medium text-muted-slate">Due</span>{" "}
@@ -64,9 +42,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
           <p className="font-medium text-[13px] text-soft-steel-blue leading-[15px] tracking-[-.1px]">
             {invoice.clientName}
           </p>
-          <p>
-            <StatusCard status={invoice.status} />
-          </p>
+          <StatusCard status={invoice.status} />
         </div>
       </div>
     </>

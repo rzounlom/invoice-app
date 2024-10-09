@@ -8,15 +8,13 @@ import Image from "next/image";
 import { Invoice } from "@/app/types";
 import InvoiceCard from "./invoice-card";
 import clsx from "clsx";
-import useMountedTheme from "../hooks/use-mounted-themes";
 
 interface InvoiceLIstProps {
   invoices: Invoice[];
 }
 
 const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
-  const { theme } = useMountedTheme();
-  const [filteredInvoices, setFilteredInvoices] = useState<Invoice[]>(invoices);
+  const [filteredInvoices, setFilteredInvoices] = useState<Invoice[]>(invoices); //TODO: turn into server component to and async when fetching data from db
   const [filter, setFilter] = useState({
     draft: false,
     paid: false,
@@ -73,21 +71,14 @@ const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
         <div className="flex w-[50%] h-full justify-between relative">
           <div
             className={clsx(
-              "h-[128px] w-[192px] flex flex-col justify-center absolute p-[24px]  mt-[48px] right-[30%] lg:right-[55%] rounded-[8px] shadow-xl transition-opacity duration-300",
+              "h-[128px] w-[192px] flex flex-col justify-center absolute p-[24px]  mt-[48px] right-[30%] lg:right-[55%] rounded-[8px] shadow-xl transition-opacity duration-300 bg-white dark:bg-midnight-navy",
               {
                 "opacity-0 pointer-events-none": !toggleFilter, // Hide the element smoothly
                 "opacity-100 pointer-events-auto": toggleFilter, // Show the element smoothly
-                "bg-deep-charcoal": theme === "dark",
-                "bg-white": theme === "light",
               }
             )}
           >
-            <div
-              className={clsx("w-full flex items-center", {
-                "text-white": theme === "dark",
-                "text-midnight-navy": theme === "light",
-              })}
-            >
+            <div className="w-full flex items-center text-midnight-navy dark:text-white">
               <div>
                 <input
                   name="draft"
@@ -99,12 +90,7 @@ const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
               </div>
               <p className="ml-[13px]">Draft</p>
             </div>
-            <div
-              className={clsx("w-full flex items-center", {
-                "text-white": theme === "dark",
-                "text-midnight-navy": theme === "light",
-              })}
-            >
+            <div className="w-full flex items-center text-midnight-navy dark:text-white">
               <div>
                 <input
                   name="pending"
@@ -116,12 +102,7 @@ const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
               </div>
               <p className="ml-[13px]">Pending</p>
             </div>
-            <div
-              className={clsx("w-full flex items-center", {
-                "text-white": theme === "dark",
-                "text-midnight-navy": theme === "light",
-              })}
-            >
+            <div className="w-full flex items-center text-midnight-navy dark:text-white">
               <div>
                 <input
                   name="paid"

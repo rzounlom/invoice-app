@@ -2,7 +2,6 @@
 
 import { FC } from "react";
 import Image from "next/image";
-import clsx from "clsx";
 import useMountedTheme from "../hooks/use-mounted-themes";
 
 const SideNav: FC = () => {
@@ -14,15 +13,7 @@ const SideNav: FC = () => {
     );
 
   return (
-    <div
-      className={clsx(
-        "h-[80px] w-full flex justify-between items-center xl:w-[103px] xl:h-full xl:flex-col",
-        {
-          "dark:bg-midnight-navy": theme === "dark",
-          "bg-pale-navy": theme === "light",
-        }
-      )}
-    >
+    <div className="h-[80px] w-full flex justify-between items-center xl:w-[103px] xl:h-full xl:flex-col bg-pale-navy dark:dark:bg-midnight-navy">
       <div className="h-[80px] w-[80px] xl:h-[103px] xl:w-[103px] relative flex justify-center items-center">
         <Image
           className="xl:hidden"
@@ -54,8 +45,9 @@ const SideNav: FC = () => {
         />
       </div>
       <div className="h-full w-[192px] flex xl:flex-col xl:h-[192px] xl:w-full">
-        <div className="h-full w-[50%] flex justify-center items-center border-r-[.5px] border-muted-navy xl:w-full xl:h-[50%] xl:border-b-[.5px]">
+        <div className="h-full w-[50%] flex justify-center items-center border-r-[.5px] xl:border-r-[0px] border-muted-navy xl:w-full xl:h-[50%] xl:border-b-[.5px]">
           <Image
+            className="hover:cursor-pointer"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             src={theme === "dark" ? "/icon-sun.svg" : "/icon-moon.svg"}
             alt="theme icon"
@@ -65,7 +57,7 @@ const SideNav: FC = () => {
         </div>
         <div className="h-full w-[50%] flex justify-center items-center xl:w-full xl:h-[50%]">
           <Image
-            className="rounded-full"
+            className="rounded-full hover:cursor-pointer"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             src="/image-avatar.jpg"
             alt="theme icon"
