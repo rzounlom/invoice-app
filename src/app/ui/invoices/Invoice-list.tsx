@@ -61,7 +61,7 @@ const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
 
   return (
     <div className="h-auto w-full max-w-[730px]">
-      <div className="w-full h-[44px] lg:h-[48px] flex items-center relative">
+      <div className="w-full h-[44px] lg:h-[48px] flex items-center">
         <div className="w-[50%] h-full flex flex-col justify-center">
           <p className="text-[24px] font-bold">Invoices</p>
           <p className="text-muted-slate text-[13px]">
