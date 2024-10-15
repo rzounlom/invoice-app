@@ -14,7 +14,7 @@ const StatusCard: FC<StatusCardProps> = ({ status }) => {
         {
           "bg-emerald-green/5 text-emerald-green/100": status === "paid",
           "bg-sunset-orange/5 text-sunset-orange/100": status === "pending",
-          "bg-pale-navy/5 text-pale-navy/100 dark:text-white":
+          "bg-pale-navy/5 text-pale-navy/100 dark:text-white dark:bg-pale-periwinkle/5":
             status === "draft",
         }
       )}
