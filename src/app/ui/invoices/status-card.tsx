@@ -14,15 +14,16 @@ const StatusCard: FC<StatusCardProps> = ({ status }) => {
         {
           "bg-emerald-green/5 text-emerald-green/100": status === "paid",
           "bg-sunset-orange/5 text-sunset-orange/100": status === "pending",
-          "bg-pale-navy/5 text-pale-navy/100": status === "draft",
+          "bg-pale-navy/5 text-pale-navy/100 dark:text-white":
+            status === "draft",
         }
       )}
     >
       <p
-        className={clsx("opacity-100 h-[8px] w-[8px] rounded-full border", {
+        className={clsx("opacity-100 h-[8px] w-[8px] rounded-full", {
           "bg-emerald-green/100": status === "paid",
           "bg-sunset-orange/100": status === "pending",
-          "bg-pale-navy/100": status === "draft",
+          "bg-pale-navy/100 dark:bg-white": status === "draft",
         })}
       ></p>
       <p className={clsx("ml-[8px]")}>{titleCase(status)}</p>
