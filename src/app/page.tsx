@@ -58,10 +58,16 @@ const Home: FC = () => {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <Link
-              href="/login"
+              href="/sign-in"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
-              Log in <span aria-hidden="true">&rarr;</span>
+              Sign in <span aria-hidden="true">&rarr;</span>
+            </Link>
+            <Link
+              href="/sign-up"
+              className="text-sm font-semibold leading-6 text-gray-900 ml-6"
+            >
+              Sign up <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
         </nav>
@@ -107,10 +113,18 @@ const Home: FC = () => {
                 </div>
                 <div className="py-6">
                   <Link
-                    href="/login"
+                    href="/sign-in"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Log in
+                    Sign in
+                  </Link>
+                </div>
+                <div className="py-6">
+                  <Link
+                    href="/sign-up"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Sign up
                   </Link>
                 </div>
               </div>

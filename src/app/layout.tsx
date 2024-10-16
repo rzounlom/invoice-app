@@ -1,5 +1,6 @@
 import "./globals.scss";
 
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { league_spartan } from "./ui/fonts";
@@ -18,10 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${league_spartan.className}`}>
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${league_spartan.className}`}>
+          <ThemeProvider attribute="class">{children}</ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
