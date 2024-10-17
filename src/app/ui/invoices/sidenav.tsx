@@ -2,6 +2,7 @@
 
 import { FC } from "react";
 import Image from "next/image";
+import { UserButton } from "@clerk/nextjs";
 import useMountedTheme from "../hooks/use-mounted-themes";
 
 const SideNav: FC = () => {
@@ -56,13 +57,15 @@ const SideNav: FC = () => {
           />
         </div>
         <div className="h-full w-[50%] flex justify-center items-center xl:w-full xl:h-[50%]">
-          <Image
-            className="rounded-full hover:cursor-pointer"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            src="/image-avatar.jpg"
-            alt="theme icon"
-            height={32}
-            width={32}
+          <UserButton
+            appearance={{
+              elements: {
+                userButtonAvatarBox: {
+                  width: "40px",
+                  height: "40px",
+                },
+              },
+            }}
           />
         </div>
       </div>
