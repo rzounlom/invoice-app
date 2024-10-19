@@ -15,7 +15,7 @@ interface InvoiceLIstProps {
 }
 
 const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
-  const [filteredInvoices, setFilteredInvoices] = useState<Invoice[]>(invoices); //TODO: turn into server component to and async when fetching data from db
+  const [filteredInvoices, setFilteredInvoices] = useState<Invoice[]>(invoices);
   const [filter, setFilter] = useState({
     draft: false,
     paid: false,
