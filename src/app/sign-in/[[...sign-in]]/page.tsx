@@ -1,5 +1,4 @@
 import { SignIn } from "@clerk/nextjs";
-
-export default function Page() {
+export default async function asyncPage() {
   return <SignIn />;
 }
