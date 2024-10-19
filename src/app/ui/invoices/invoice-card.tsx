@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
-import { Invoice } from "@/app/types";
+// import { Invoice } from "@/app/types";
+import type { Invoice } from "@prisma/client";
 import StatusCard from "./status-card";
 import { formatCurrency } from "@/lib/utils/format-currency";
 import { formatDate } from "@/lib/utils/format-date";
@@ -22,7 +23,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
             Due
           </span>{" "}
           <span className="ml-[5px] text-cool-blue dark:text-white">
-            {formatDate(invoice.paymentDue)}
+            {formatDate(new Date(invoice.paymentDue).toISOString())}
           </span>
         </p>
         <p className="w-[20%] font-medium text-[13px] text-soft-steel-blue dark:text-white leading-[15px] tracking-[-.1px]">
@@ -55,7 +56,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
               Due
             </span>{" "}
             <span className="ml-[5px] text-cool-blue dark:text-white">
-              {formatDate(invoice.paymentDue)}
+              {formatDate(new Date(invoice.paymentDue).toISOString())}
             </span>
           </p>
           <p className="font-bold text-jet-black dark:text-white leading-[24px] tracking-[-.25px]">

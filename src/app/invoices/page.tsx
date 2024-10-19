@@ -4,7 +4,8 @@ import { FC } from "react";
 import InvoiceLIst from "../ui/invoices/Invoice-list";
 import InvoiceMain from "../ui/invoices/invoices-main";
 import { db } from "@/db";
-import invoices from "@/data/data.json";
+
+// import invoices from "@/data/data.json";
 
 const Home: FC = async () => {
   // Get the userId from auth() -- if null, the user is not signed in
@@ -17,13 +18,21 @@ const Home: FC = async () => {
   console.log("Auth details", { userId, user });
   //TODO: remove hardcoded data and fetch from db
 
-  const users = await db.user.findMany();
+  const foundUser = await db.user.findUnique({
+    where: {
+      clerkId: user?.id,
+    },
+    include: {
+      invoices: true, // Include the user's invoices in the query
+    },
+  });
 
-  console.log("Users", users);
+  const userInvoices = foundUser?.invoices || [];
+
   return (
     <div className="w-full h-[calc(100vh-80px)] xl:w-[calc(100vw-103px)] xl:h-full">
       <InvoiceMain>
-        <InvoiceLIst invoices={invoices} />
+        <InvoiceLIst invoices={userInvoices} />
       </InvoiceMain>
     </div>
   );

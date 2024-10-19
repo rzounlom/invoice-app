@@ -11,7 +11,58 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  createdAt DateTime @default(now())
+  id        String    @id @default(uuid())
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  clerkId   String    @unique
+  name      String?
+  // Relationships
+  invoices  Invoice[] // A user can have multiple invoices
+}
+
+model Invoice {
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now())
+  paymentDue      DateTime
+  description     String
+  paymentTerms    Int
+  clientName      String
+  clientEmail     String
+  status          String
+  senderAddress   Address  @relation("SenderAddress", fields: [senderAddressId], references: [id])
+  senderAddressId String // Foreign key to Address (sender address)
+  clientAddress   Address  @relation("ClientAddress", fields: [clientAddressId], references: [id])
+  clientAddressId String // Foreign key to Address (client address)
+  items           Item[] // One-to-many relationship with items
+  total           Float
+
+  // Foreign key to User
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Address {
+  id       String @id @default(uuid())
+  street   String
+  city     String
+  postCode String
+  country  String
+
+  // Invoices linked to this address as client
+  clientInvoices Invoice[] @relation("ClientAddress")
+
+  // Invoices linked to this address as sender
+  senderInvoices Invoice[] @relation("SenderAddress")
+}
+
+model Item {
+  id       String @id @default(uuid())
+  name     String
+  quantity Int
+  price    Float
+  total    Float
+
+  // Foreign key to Invoice
+  invoiceId String
+  invoice   Invoice @relation(fields: [invoiceId], references: [id])
 }

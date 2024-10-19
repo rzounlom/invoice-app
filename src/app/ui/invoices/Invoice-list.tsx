@@ -5,7 +5,7 @@ import "./invoice-list.scss";
 import { FC, useState } from "react";
 
 import Image from "next/image";
-import { Invoice } from "@/app/types";
+import { Invoice } from "@prisma/client";
 import InvoiceCard from "./invoice-card";
 import clsx from "clsx";
 
