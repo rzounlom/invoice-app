@@ -7,6 +7,7 @@ import { FC, useState } from "react";
 import Image from "next/image";
 import { Invoice } from "@prisma/client";
 import InvoiceCard from "./invoice-card";
+import NoInovices from "./no-invoices";
 import clsx from "clsx";
 
 interface InvoiceLIstProps {
@@ -60,7 +61,11 @@ const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
   };
 
   return (
-    <div className="h-auto w-full max-w-[730px]">
+    <div
+      className={clsx(`h-auto w-full max-w-[730px]`, {
+        "h-full": invoices.length === 0,
+      })}
+    >
       <div className="w-full h-[44px] lg:h-[48px] flex items-center">
         <div className="w-[50%] h-full flex flex-col justify-center">
           <p className="text-[24px] font-bold">Invoices</p>
@@ -154,11 +159,14 @@ const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
           </div>
         </div>
       </div>
-      <div className="mt-[30px] mb-[100px]">
-        {filteredInvoices.map((invoice) => (
-          <InvoiceCard key={invoice.id} invoice={invoice} />
-        ))}
-      </div>
+      {invoices.length > 0 && (
+        <div className="mt-[30px] mb-[100px]">
+          {filteredInvoices.map((invoice) => (
+            <InvoiceCard key={invoice.id} invoice={invoice} />
+          ))}
+        </div>
+      )}
+      {invoices.length === 0 && <NoInovices />}
     </div>
   );
 };
