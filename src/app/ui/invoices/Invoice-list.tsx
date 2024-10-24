@@ -7,6 +7,7 @@ import { FC, useState } from "react";
 import Image from "next/image";
 import { Invoice } from "@prisma/client";
 import InvoiceCard from "./invoice-card";
+import Link from "next/link";
 import NoInovices from "./no-invoices";
 import clsx from "clsx";
 
@@ -151,14 +152,23 @@ const InvoiceLIst: FC<InvoiceLIstProps> = ({ invoices }) => {
                   alt="plus icon"
                 />
               </div>
-              <p className="mr-[8px] font-bold text-[15px] lg:hidden">New</p>
-              <p className="mr-[8px] font-bold text-[15px] hidden lg:block">
+              <Link
+                href="/invoices/new"
+                className="mr-[8px] font-bold text-[15px] lg:hidden"
+              >
+                New
+              </Link>
+              <Link
+                href="/invoices/new"
+                className="mr-[8px] font-bold text-[15px] hidden lg:block"
+              >
                 New Invoice
-              </p>
+              </Link>
             </button>
           </div>
         </div>
       </div>
+
       {invoices.length > 0 && (
         <div className="mt-[30px] mb-[100px]">
           {filteredInvoices.map((invoice) => (
