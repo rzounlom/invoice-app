@@ -62,10 +62,10 @@ const InvoiceItemEdit: FC<InvoiceItemEditProps> = ({ item }) => {
             className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
           />
         </div>
-        <div className="mt-[25px] w-[31%] border">
+        <div className="mt-[25px] w-[31%] ml-[5px]">
           <label
             htmlFor="total"
-            className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
+            className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate ml-[20px]"
           >
             Total
           </label>
@@ -79,7 +79,7 @@ const InvoiceItemEdit: FC<InvoiceItemEditProps> = ({ item }) => {
             className="mt-[9px] bg-transparent block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:ring-inset sm:text-sm sm:leading-6"
           />
         </div>
-        <div className="border mt-[25px] w-[15%] flex justify-center items-center text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate">
+        <div className="mt-[25px] w-[15%] flex justify-center items-center text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate">
           <FaTrash className="hover:cursor-pointer hover:text-coral-red mt-[21px] transition-colors duration-250 ease-in-out" />
         </div>
       </div>
