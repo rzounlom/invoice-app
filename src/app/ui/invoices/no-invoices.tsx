@@ -9,9 +9,8 @@ const NoInovices: FC = ({}) => {
           <Image
             src="/illustration-empty.svg"
             alt="no invoices"
-            layout="responsive"
-            width={100} // width as a percentage or arbitrary number
-            height={100} // height as a percentage or arbitrary number
+            width={242} // width as a percentage or arbitrary number
+            height={200} // height as a percentage or arbitrary number
           />
         </div>
 
