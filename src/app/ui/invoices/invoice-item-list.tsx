@@ -1,12 +1,13 @@
 import { FC } from "react";
-import InvoiceItemNew from "./invoice-item-new";
+import InvoiceItem from "./invoice-item";
 import { Item } from "@prisma/client";
 
 interface InvoiceItemListProps {
-  items: Item[];
+  items: Omit<Item, "id">[];
+  onRemoveItem: (id: string) => void;
 }
 
-const InvoiceItemList: FC<InvoiceItemListProps> = ({ items }) => {
+const InvoiceItemList: FC<InvoiceItemListProps> = ({ items, onRemoveItem }) => {
   return (
     <div className="w-full mt-[69px] md:mt-[25px]">
       <p className="text-[15px] font-bold text-lavender-purple leading-[15px] tracking-[-.25px]">
@@ -14,7 +15,11 @@ const InvoiceItemList: FC<InvoiceItemListProps> = ({ items }) => {
       </p>
 
       {items.map((item) => (
-        <InvoiceItemNew key={item.id} item={item} />
+        <InvoiceItem
+          key={item.invoiceId}
+          item={item}
+          onRemoveItem={onRemoveItem}
+        />
       ))}
     </div>
   );

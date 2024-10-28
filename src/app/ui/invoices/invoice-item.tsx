@@ -2,11 +2,12 @@ import { FC } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { Item } from "@prisma/client";
 
-interface InvoiceItemEditProps {
-  item: Item;
+interface InvoiceItemProps {
+  item: Omit<Item, "id">;
+  onRemoveItem: (id: string) => void;
 }
 
-const InvoiceItemEdit: FC<InvoiceItemEditProps> = ({ item }) => {
+const InvoiceItem: FC<InvoiceItemProps> = ({ item, onRemoveItem }) => {
   return (
     <div className="mt-[24px] md:mt-[5px] w-full md:flex md:items-center md:justify-between">
       <div className="md:w-[40%] md:mt-[25px]">
@@ -23,7 +24,7 @@ const InvoiceItemEdit: FC<InvoiceItemEditProps> = ({ item }) => {
           type="text"
           value={item.name}
           placeholder="Banner Design"
-          className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
         />
       </div>
 
@@ -76,15 +77,18 @@ const InvoiceItemEdit: FC<InvoiceItemEditProps> = ({ item }) => {
             type="text"
             value={item.total}
             placeholder="0"
-            className="mt-[9px] bg-transparent block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:ring-inset sm:text-sm sm:leading-6"
+            className="mt-[9px] bg-transparent dark:text-muted-slate block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:ring-inset sm:text-sm sm:leading-6"
           />
         </div>
         <div className="mt-[25px] w-[15%] flex justify-center items-center text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate">
-          <FaTrash className="hover:cursor-pointer hover:text-coral-red mt-[21px] transition-colors duration-250 ease-in-out" />
+          <FaTrash
+            className="hover:cursor-pointer hover:text-coral-red mt-[21px] transition-colors duration-250 ease-in-out"
+            onClick={() => onRemoveItem(item.invoiceId)}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default InvoiceItemEdit;
+export default InvoiceItem;

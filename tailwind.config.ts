@@ -23,6 +23,7 @@ const config: Config = {
         "jet-black": "#0C0E16",
         "coral-red": "#EC5757",
         "off-white": "#F8F8FB",
+        "muted-white": "#F9FAFE;",
         "dark-indigo": "#141625",
         "emerald-green": "#33D69F",
         "sunset-orange": "#FF8F00",

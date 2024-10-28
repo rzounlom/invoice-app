@@ -6,6 +6,8 @@ import Image from "next/image";
 import InvoiceItemList from "./invoice-item-list";
 import { Item } from "@prisma/client";
 import Link from "next/link";
+import NewInvoiceModal from "./new-invoice-modal";
+import { v4 as uuidv4 } from "uuid";
 
 const items = [
   {
@@ -35,18 +37,37 @@ const items = [
 ];
 
 const NewInvoice: FC = () => {
-  const [invoiceItmes, setInvoiceItems] = useState<Item[]>(items);
-  const [newItem, setNewItem] = useState<Omit<Item, "id">>({
-    name: "",
-    quantity: 0,
-    price: 0,
-    total: 0,
-    invoiceId: "",
-  });
+  const [invoiceItmes, setInvoiceItems] = useState<Omit<Item, "id">[]>(items);
+  const [open, setOpen] = useState(false);
+
+  const handleAddItem = (item: Omit<Item, "id" | "invoiceId">) => {
+    console.log("Add Item", item);
+    const newItem = {
+      ...item,
+      invoiceId: uuidv4(),
+      price: Number(item.price),
+      quantity: Number(item.quantity),
+    };
+    console.log("New Item", newItem);
+    setInvoiceItems([...invoiceItmes, newItem]);
+  };
+
+  const handleDeleteItem = (id: string) => {
+    console.log("Delete Item", id);
+    setInvoiceItems(invoiceItmes.filter((item) => item.invoiceId !== id));
+  };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
-      <div className="h-auto w-full max-w-[730px] pb-[100px]">
+      <NewInvoiceModal
+        open={open}
+        onClose={handleClose}
+        addNewItem={handleAddItem}
+      />
+      <div className="h-auto w-full max-w-[735px] pb-[100px]">
         <Link
           href="/invoices"
           className="w-[100px] flex items-center cursor-pointer font-bold"
@@ -289,7 +310,18 @@ const NewInvoice: FC = () => {
           </div>
 
           {/* Invoice Items */}
-          <InvoiceItemList items={invoiceItmes} />
+          <InvoiceItemList
+            items={invoiceItmes}
+            onRemoveItem={handleDeleteItem}
+          />
+          <div className="h-[48px] w-full mt-[15px]">
+            <button
+              className="h-full w-full flex justify-center items-center bg-pale-periwinkle hover:bg-muted-slate hover:text-off-white rounded-[24px] text-[15px] font-medium text-cool-blue dark:bg-deep-charcoal dark:hover:bg-pale-navy dark:text-pale-periwinkle transition duration-300 ease-in-out"
+              onClick={handleOpen}
+            >
+              + Add New Item
+            </button>
+          </div>
         </div>
       </div>
     </>
