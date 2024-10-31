@@ -84,7 +84,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
             <div className="h-[10px] text-coral-red">
               {error && "Please fill out all fields"}
             </div>
-            <form className="mt-[24px] md:mt-[5px] w-full md:flex md:items-center md:justify-between">
+            <div className="mt-[24px] md:mt-[5px] w-full md:flex md:items-center md:justify-between">
               <div className="md:w-[40%] md:mt-[25px]">
                 <label
                   htmlFor="name"
@@ -161,7 +161,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                   />
                 </div>
               </div>
-            </form>
+            </div>
           </DialogPanel>
         </div>
       </div>
