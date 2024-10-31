@@ -1,5 +1,7 @@
 "use client";
 
+import * as actions from "@/actions";
+
 import { FC, useState } from "react";
 
 import Image from "next/image";
@@ -7,6 +9,7 @@ import InvoiceItemList from "./invoice-item-list";
 import { Item } from "@prisma/client";
 import Link from "next/link";
 import NewInvoiceModal from "./new-invoice-modal";
+import { useFormState } from "react-dom";
 import { v4 as uuidv4 } from "uuid";
 
 const items = [
@@ -39,6 +42,14 @@ const items = [
 const NewInvoice: FC = () => {
   const [invoiceItmes, setInvoiceItems] = useState<Omit<Item, "id">[]>(items);
   const [open, setOpen] = useState(false);
+  const [formState, action] = useFormState(
+    actions.createInvoice.bind(null, invoiceItmes),
+    {
+      errors: {},
+    }
+  );
+
+  console.log("Form State", formState);
 
   const handleAddItem = (item: Omit<Item, "id" | "invoiceId">) => {
     console.log("Add Item", item);
@@ -67,7 +78,7 @@ const NewInvoice: FC = () => {
         onClose={handleClose}
         addNewItem={handleAddItem}
       />
-      <div className="h-auto w-full max-w-[735px] pb-[100px]">
+      <form action={action} className="h-auto w-full max-w-[735px] pb-[100px]">
         <Link
           href="/invoices"
           className="w-[100px] flex items-center cursor-pointer font-bold"
@@ -93,14 +104,14 @@ const NewInvoice: FC = () => {
           <div className="mt-[24px]">
             <div>
               <label
-                htmlFor="address"
+                htmlFor="senderStreet"
                 className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
               >
                 Street Address
               </label>
               <input
-                id="address"
-                name="address"
+                id="senderStreet"
+                name="senderStreet"
                 type="text"
                 placeholder="777 Miami Ave"
                 className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -109,14 +120,14 @@ const NewInvoice: FC = () => {
             <div className="flex flex-wrap justify-between">
               <div className="mt-[25px] w-[47%] md:w-[32%]">
                 <label
-                  htmlFor="city"
+                  htmlFor="senderCity"
                   className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
                 >
                   City
                 </label>
                 <input
-                  id="city"
-                  name="city"
+                  id="senderCity"
+                  name="senderCity"
                   type="text"
                   placeholder="Miami"
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -124,14 +135,14 @@ const NewInvoice: FC = () => {
               </div>
               <div className="mt-[25px] w-[47%] md:w-[32%]">
                 <label
-                  htmlFor="zip"
+                  htmlFor="senderPoastalCode"
                   className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
                 >
                   Postal Code
                 </label>
                 <input
-                  id="zip"
-                  name="zip"
+                  id="senderPoastalCode"
+                  name="senderPoastalCode"
                   type="text"
                   placeholder="46240"
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -139,14 +150,14 @@ const NewInvoice: FC = () => {
               </div>
               <div className="mt-[25px] w-full md:w-[32%]">
                 <label
-                  htmlFor="country"
+                  htmlFor="senderCountry"
                   className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
                 >
                   Country
                 </label>
                 <input
-                  id="country"
-                  name="country"
+                  id="senderCountry"
+                  name="senderCountry"
                   type="text"
                   placeholder="United States"
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -194,14 +205,14 @@ const NewInvoice: FC = () => {
             </div>
             <div>
               <label
-                htmlFor="clientAddress"
+                htmlFor="clientStreet"
                 className="block mt-[25px] text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
               >
                 Street Address
               </label>
               <input
-                id="clientAddress"
-                name="clientAddress"
+                id="clientStreet"
+                name="clientStreet"
                 type="text"
                 placeholder="84 Church Way"
                 className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -225,14 +236,14 @@ const NewInvoice: FC = () => {
               </div>
               <div className="mt-[25px] w-[47%] md:w-[32%]">
                 <label
-                  htmlFor="clientZip"
+                  htmlFor="clientPostalCode"
                   className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
                 >
                   Postal Code
                 </label>
                 <input
-                  id="clientZip"
-                  name="clientZip"
+                  id="clientPostalCode"
+                  name="clientPostalCode"
                   type="text"
                   placeholder="BD1 9PB"
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -266,13 +277,12 @@ const NewInvoice: FC = () => {
                   htmlFor="invoiceDate"
                   className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
                 >
-                  Invoice Date
+                  Issue Date
                 </label>
                 <input
                   id="invoiceDate"
                   name="invoiceDate"
-                  type="text"
-                  placeholder="21 Aug 2021"
+                  type="date"
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -283,13 +293,15 @@ const NewInvoice: FC = () => {
                 >
                   Payment Terms
                 </label>
-                <input
+                <select
                   id="paymentTerms"
                   name="paymentTerms"
-                  type="text"
-                  placeholder="Net 30 Days"
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
+                >
+                  <option value="1">Net 30</option>
+                  <option value="2">Net 60</option>
+                  <option value="3">Net 90</option>
+                </select>
               </div>
               <div className="mt-[25px] w-full">
                 <label
@@ -322,8 +334,12 @@ const NewInvoice: FC = () => {
               + Add New Item
             </button>
           </div>
+
+          <div>
+            <button type="submit">Submit</button>
+          </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };
