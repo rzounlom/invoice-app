@@ -56,7 +56,7 @@ export async function createInvoice(
 ): Promise<CreateInvoiceFormState> {
   const invoiceData = {
     paymentDue: formData.get("invoiceDate") as string,
-    // description: formData.get("description") as string,
+    description: formData.get("description") as string,
     paymentTerms: parseInt(formData.get("paymentTerms") as string, 10),
     clientName: formData.get("clientName") as string,
     clientEmail: formData.get("clientEmail") as string,
@@ -73,8 +73,8 @@ export async function createInvoice(
       postCode: formData.get("clientPostalCode") as string,
       country: formData.get("clientCountry") as string,
     },
-    // items: invoiceItems,
-    // total: invoiceItems.reduce((acc, item) => acc + item.total, 0),
+    items: invoiceItems,
+    total: invoiceItems.reduce((acc, item) => acc + item.total, 0),
   };
 
   console.log({ formState, invoiceData });
