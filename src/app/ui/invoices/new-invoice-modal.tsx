@@ -19,10 +19,12 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
 }) => {
   const [item, setItem] = useState({
     name: "",
-    quantity: 0,
+    quantity: 1,
     price: 0,
     total: 0,
   });
+
+  const [error, setError] = useState(false);
 
   const handleItemChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -42,13 +44,13 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
     setError(false);
     setItem({
       name: "",
-      quantity: 0,
+      quantity: 1,
       price: 0,
       total: 0,
     });
     onClose();
   };
-  const [error, setError] = useState(false);
+
   const handleAddItem = () => {
     setError(false);
     if (item.name === "" || item.quantity === 0 || item.price === 0) {
@@ -82,7 +84,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
             <div className="h-[10px] text-coral-red">
               {error && "Please fill out all fields"}
             </div>
-            <div className="mt-[24px] md:mt-[5px] w-full md:flex md:items-center md:justify-between">
+            <form className="mt-[24px] md:mt-[5px] w-full md:flex md:items-center md:justify-between">
               <div className="md:w-[40%] md:mt-[25px]">
                 <label
                   htmlFor="name"
@@ -111,7 +113,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                   <input
                     id="quantity"
                     name="quantity"
-                    type="text"
+                    type="number"
                     value={item.quantity}
                     placeholder="1"
                     className="mt-[9px] block w-full h-[48px] rounded-md border-0  py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
@@ -128,9 +130,9 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                   <input
                     id="price"
                     name="price"
-                    type="text"
+                    type="number"
                     value={item.price}
-                    placeholder="156.00"
+                    placeholder={"156.00"}
                     className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
                     onChange={handleItemChange}
                   />
@@ -146,7 +148,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                     readOnly
                     id="total"
                     name="total"
-                    type="text"
+                    type="number"
                     value={item.total}
                     placeholder="0"
                     className="mt-[9px] bg-transparent dark:text-muted-slate block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:ring-inset sm:text-sm sm:leading-6"
@@ -159,7 +161,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                   />
                 </div>
               </div>
-            </div>
+            </form>
           </DialogPanel>
         </div>
       </div>
