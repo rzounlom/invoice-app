@@ -16,7 +16,9 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
       <div className="hidden md:flex md:flex-row justify-between items-center w-full h-[72px] rounded-[8px] shadow-md mt-[16px] bg-white dark:bg-midnight-navy hover:cursor-pointer border border-transparent hover:border-lavender-purple transition-colors duration-300 px-[24px]">
         <p className="w-[20%] font-bold tracking-[-.25px] leading[15px] ">
           <span className="text-muted-slate">#</span>
-          <span className="text-jet-black dark:text-white">{invoice.id}</span>
+          <span className="text-jet-black dark:text-white">
+            {invoice.id.substring(0, 6).toUpperCase()}
+          </span>
         </p>
         <p className="w-[20%] flex text-[13px] tracking-[-.1px] leading[15px]">
           <span className="font-medium text-muted-slate dark:text-white">

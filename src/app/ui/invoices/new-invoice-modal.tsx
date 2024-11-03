@@ -103,7 +103,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                 />
               </div>
               <div className="md:w-[58%] flex flex-wrap justify-between">
-                <div className="mt-[25px] w-[15%]">
+                <div className="mt-[25px] w-[17%]">
                   <label
                     htmlFor="quantity"
                     className="block text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate"
