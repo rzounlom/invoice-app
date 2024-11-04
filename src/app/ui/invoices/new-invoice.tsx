@@ -387,13 +387,13 @@ const NewInvoice: FC = () => {
           <div className="h-[10px text-coral-red mt-[34px]">
             {formState.errors._form && `${formState.errors._form.join(", ")}`}
           </div>
-          <div className="h-[91px] mt-[41px] bg-white dark:bg-midnight-navy flex items-center justify-around">
+          <div className="h-[91px] mt-[41px] bg-white dark:bg-midnight-navy flex items-center justify-around md:justify-between md:px-[30px]">
             <Link href="/invoices">
               <button className="border h-[48px] w-[84px] rounded-[24px] bg-muted-white text-[15px] font-bold text-cool-blue leading-[15px] tracking-[-.25px]">
                 Discard
               </button>
             </Link>{" "}
-            <div className="w-[70%] md:w-1/2 flex justify-around">
+            <div className="w-[70%] md:w-[45%] flex justify-around">
               <button
                 className="h-[48px] w-[117px] md:w-[133px] rounded-[24px] bg-pale-navy text-[15px] font-bold text-muted-slate dark:text-pale-periwinkle leading-[15px] tracking-[-.25px]"
                 type="submit"
