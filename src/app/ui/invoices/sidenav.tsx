@@ -2,6 +2,7 @@
 
 import { FC } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import useMountedTheme from "../hooks/use-mounted-themes";
 
@@ -16,13 +17,16 @@ const SideNav: FC = () => {
   return (
     <div className="h-[80px] w-full flex justify-between items-center xl:w-[103px] xl:h-full xl:flex-col bg-pale-navy dark:dark:bg-midnight-navy">
       <div className="h-[80px] w-[80px] xl:h-[103px] xl:w-[103px] relative flex justify-center items-center">
-        <Image
-          className="xl:hidden"
-          src="/logo-outer.svg"
-          alt="logo"
-          height={80}
-          width={80}
-        />
+        <Link href="/invoices">
+          <Image
+            className="xl:hidden"
+            src="/logo-outer.svg"
+            alt="logo"
+            height={80}
+            width={80}
+          />
+        </Link>
+
         <Image
           className="xl:hidden absolute z-10"
           src="/logo-inner.svg"
@@ -30,13 +34,17 @@ const SideNav: FC = () => {
           height={25}
           width={25}
         />
-        <Image
-          className="hidden xl:block"
-          src="/logo-outer.svg"
-          alt="logo"
-          height={103}
-          width={103}
-        />
+
+        <Link href="/invoices">
+          <Image
+            className="hidden xl:block"
+            src="/logo-outer.svg"
+            alt="logo"
+            height={103}
+            width={103}
+          />
+        </Link>
+
         <Image
           className="hidden xl:block absolute z-10"
           src="/logo-inner.svg"
