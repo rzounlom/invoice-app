@@ -393,22 +393,24 @@ const NewInvoice: FC = () => {
                 Discard
               </button>
             </Link>{" "}
-            <button
-              className="h-[48px] w-[117px] rounded-[24px] bg-pale-navy text-[15px] font-bold text-muted-slate dark:text-pale-periwinkle leading-[15px] tracking-[-.25px]"
-              type="submit"
-              onClick={() => setInvoiceStatus("draft")}
-              disabled={pending}
-            >
-              {pending ? "Saving..." : "Save as Draft"}
-            </button>
-            <button
-              className="h-[48px] w-[117px] rounded-[24px] bg-lavender-purple text-[15px] font-bold text-white dark:text-pale-periwinkle leading-[15px] tracking-[-.25px]"
-              type="submit"
-              onClick={() => setInvoiceStatus("pending")}
-              disabled={pending}
-            >
-              {pending ? "Saving..." : "Save & Send"}
-            </button>
+            <div className="w-[70%] md:w-1/2 flex justify-around">
+              <button
+                className="h-[48px] w-[117px] md:w-[133px] rounded-[24px] bg-pale-navy text-[15px] font-bold text-muted-slate dark:text-pale-periwinkle leading-[15px] tracking-[-.25px]"
+                type="submit"
+                onClick={() => setInvoiceStatus("draft")}
+                disabled={pending}
+              >
+                {pending ? "Saving..." : "Save as Draft"}
+              </button>
+              <button
+                className="h-[48px] w-[117px] md:w-[133px] rounded-[24px] bg-lavender-purple text-[15px] font-bold text-white dark:text-pale-periwinkle leading-[15px] tracking-[-.25px]"
+                type="submit"
+                onClick={() => setInvoiceStatus("pending")}
+                disabled={pending}
+              >
+                {pending ? "Saving..." : "Save & Send"}
+              </button>
+            </div>
           </div>
         </div>
       </form>

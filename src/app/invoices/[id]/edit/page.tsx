@@ -27,7 +27,9 @@ const SingleInvoice: FC<SingleInvoiceProps> = async ({ params }) => {
     <div className="w-full h-[calc(100vh-80px)] xl:w-[calc(100vw-103px)] xl:h-full">
       <InvoiceMain>
         <div className="border h-full w-full flex flex-col">
-          <div className="h-[91px] ">Single Invoice page with invoice {id}</div>
+          <div className="h-[91px] ">
+            Single Invoice Edit page with invoice {id}
+          </div>
         </div>
       </InvoiceMain>
     </div>
