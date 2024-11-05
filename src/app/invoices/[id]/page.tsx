@@ -1,5 +1,7 @@
 import { FC } from "react";
+import { FullInvoice } from "@/lib/utils/types/invoices";
 import InvoiceMain from "@/app/ui/invoices/invoices-main";
+import SingleInvoice from "@/app/ui/invoices/single-invoice";
 import { db } from "@/db";
 
 interface SingleInvoiceProps {
@@ -8,10 +10,10 @@ interface SingleInvoiceProps {
   };
 }
 
-const SingleInvoice: FC<SingleInvoiceProps> = async ({ params }) => {
+const SingleInvoicePage: FC<SingleInvoiceProps> = async ({ params }) => {
   const { id } = params;
 
-  const invoice = await db.invoice.findUnique({
+  const invoice: FullInvoice | null = await db.invoice.findUnique({
     where: {
       id,
     },
@@ -22,16 +24,14 @@ const SingleInvoice: FC<SingleInvoiceProps> = async ({ params }) => {
     },
   });
 
-  console.log("Found Invoice!", invoice);
+  // console.log("Found Invoice!", invoice);
   return (
-    <div className="w-full h-[calc(100vh-80px)] xl:w-[calc(100vw-103px)] xl:h-full">
+    <div className="w-full h-[calc(100vh-80px)] xl:w-[calc(100vw-103px)] xl:h-full text-jet-black dark:text-white">
       <InvoiceMain>
-        <div className="border h-full w-full flex flex-col">
-          <div className="h-[91px] ">Single Invoice page with invoice {id}</div>
-        </div>
+        {invoice && <SingleInvoice invoice={invoice} />}
       </InvoiceMain>
     </div>
   );
 };
 
-export default SingleInvoice;
+export default SingleInvoicePage;
