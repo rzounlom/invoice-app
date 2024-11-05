@@ -22,7 +22,6 @@ const SingleInvoice: FC<SingleInvoiceProps> = async ({ params }) => {
     },
   });
 
-  console.log("Found Invoice!", invoice);
   return (
     <div className="w-full h-[calc(100vh-80px)] xl:w-[calc(100vw-103px)] xl:h-full">
       <InvoiceMain>

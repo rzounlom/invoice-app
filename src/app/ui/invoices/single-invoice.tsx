@@ -11,7 +11,6 @@ interface SingleInvoiceProps {
 }
 
 const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
-  console.log("Single Invoice", invoice);
   return (
     <div className="h-auto w-full max-w-[735px] pb-[70px]">
       <Link

@@ -20,8 +20,6 @@ const Home: FC = async () => {
     },
   });
 
-  console.log("Auth details", { foundUser });
-
   return (
     <div className="w-full h-[calc(100vh-80px)] xl:w-[calc(100vw-103px)] xl:h-full">
       <InvoiceMain>

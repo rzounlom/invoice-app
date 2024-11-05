@@ -8,7 +8,6 @@ interface SingleInvoiceItemDesktopProps {
 const SingleInvoiceItemDesktop: FC<SingleInvoiceItemDesktopProps> = ({
   item,
 }) => {
-  console.log("Single Invoice Item Desktop", item);
   return (
     <div className="h-[15px] mt-[32px] flex justify-between">
       <div className="h-full">
