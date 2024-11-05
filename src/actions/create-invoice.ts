@@ -2,6 +2,7 @@
 
 import { Item } from "@prisma/client";
 import { auth } from "@clerk/nextjs/server";
+import { calculateDueDate } from "@/lib/utils/calculateDueDate";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -133,7 +134,10 @@ export async function createInvoice(
     const createdInvoice = await db.invoice.create({
       data: {
         userId: user.id,
-        paymentDue: new Date(invoiceData.paymentDue),
+        paymentDue: calculateDueDate(
+          invoiceData.paymentDue,
+          invoiceData.paymentTerms
+        ),
         description: invoiceData.description,
         paymentTerms: invoiceData.paymentTerms,
         clientName: invoiceData.clientName,
