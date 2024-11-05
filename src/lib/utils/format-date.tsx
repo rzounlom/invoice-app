@@ -1,4 +1,4 @@
-export function formatDate(dateString: string): string {
+export function formatDate(dateString: Date): string {
   const date = new Date(dateString);
 
   // Get the day, month, and year
