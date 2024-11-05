@@ -12,33 +12,6 @@ import Link from "next/link";
 import NewInvoiceModal from "./new-invoice-modal";
 import { v4 as uuidv4 } from "uuid";
 
-// const items = [
-//   {
-//     name: "Front-End Development",
-//     quantity: 1,
-//     price: 180,
-//     total: 180,
-//     invoiceId: "1",
-//     id: "a",
-//   },
-//   {
-//     name: "Back-End Development",
-//     quantity: 1,
-//     price: 180,
-//     total: 180,
-//     invoiceId: "2",
-//     id: "ab",
-//   },
-//   {
-//     name: "UI/UX Design",
-//     quantity: 1,
-//     price: 250,
-//     total: 250,
-//     invoiceId: "3",
-//     id: "abc",
-//   },
-// ];
-
 const NewInvoice: FC = () => {
   const [invoiceItmes, setInvoiceItems] = useState<Omit<Item, "id">[]>([]);
   const [open, setOpen] = useState(false);
