@@ -1,6 +1,9 @@
 "use client";
 
+import * as actions from "@/actions";
+
 import { FC, useEffect, useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
 import DeleteInvoiceModal from "./delete-invoice-modal";
 import { FullInvoice } from "@/lib/utils/types/invoices";
@@ -8,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SingleInvoiceItemList from "./single-invoice-item-list";
 import StatusCard from "./status-card";
-import { deleteInvoice } from "@/actions/delete-invoice";
+import clsx from "clsx";
 import { formatDate } from "@/lib/utils/format-date";
 
 interface SingleInvoiceProps {
@@ -20,6 +23,19 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  const { pending } = useFormStatus();
+
+  const [formState, action] = useFormState(
+    actions.updateInvoiceStatus.bind(
+      null,
+      invoice.id,
+      invoice.status === "draft" ? "pending" : "paid"
+    ),
+    {
+      errors: {},
+    }
+  );
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -35,6 +51,16 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
     // Clean up event listener on unmount
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  const renderStatusText = () => {
+    if (pending) {
+      return "Saving...";
+    } else if (invoice.status === "draft") {
+      return "Mark as Pending";
+    } else {
+      return "Mark as Paid";
+    }
+  };
 
   return (
     <div className="h-auto w-full max-w-[735px] pb-[70px]">
@@ -64,23 +90,49 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
           </p>
           <StatusCard status={invoice.status} />
         </div>
-        <div className="hidden h-full w-[50%] p-[24px] md:flex justify-between items-center">
+        <div
+          className={clsx(
+            `hidden h-full w-[50%] p-[24px] md:flex items-center`,
+            {
+              "justify-around": invoice.status === "paid",
+              "justify-between": invoice.status !== "paid",
+            }
+          )}
+        >
           <Link href={`/invoices/${invoice.id}}/edit`}>
-            <button className="w-[73px] h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold">
+            <button
+              className={clsx(
+                `w-[73px] h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
+                {
+                  "w-[131px]": invoice.status === "paid",
+                }
+              )}
+            >
               Edit
             </button>
           </Link>
 
           <button
-            className="w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold"
+            className={clsx(
+              `w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
+              {
+                "w-[131px]": invoice.status === "paid",
+              }
+            )}
             onClick={handleOpen}
           >
             Delete
           </button>
-          <button className="w-[131px] h-[48px] bg-lavender-purple rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold">
-            {" "}
-            Mark as Paid
-          </button>
+          {invoice.status !== "paid" && (
+            <form action={action}>
+              <button
+                type="submit"
+                className="w-[131px] h-[48px] bg-lavender-purple rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold"
+              >
+                {renderStatusText()}
+              </button>
+            </form>
+          )}
         </div>
       </div>
 
@@ -165,23 +217,48 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
 
       {isMobile && (
         <div className="md:hidden h-[91px] mt-[31px] shadow-md rounded-[8px] flex justify-between bg-white dark:bg-midnight-navy">
-          <div className="md:hidden h-full w-full p-[24px] flex justify-between items-center">
+          <div
+            className={clsx(
+              `md:hidden h-full w-full p-[24px] flex  items-center`,
+              {
+                "justify-around": invoice.status === "paid",
+                "justify-between": invoice.status !== "paid",
+              }
+            )}
+          >
             <Link href={`/invoices/${invoice.id}}/edit`}>
-              <button className="w-[73px] h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold">
+              <button
+                className={clsx(
+                  `w-[73px] h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
+                  { "w-[131px]": invoice.status === "paid" }
+                )}
+              >
                 Edit
               </button>
             </Link>
 
             <button
-              className="w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold"
+              className={clsx(
+                `w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
+                {
+                  "w-[131px]": invoice.status === "paid",
+                }
+              )}
               onClick={handleOpen}
             >
               Delete
             </button>
-            <button className="w-[131px] ml-[2px] h-[48px] bg-lavender-purple rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold">
-              {" "}
-              Mark as Paid
-            </button>
+            {invoice.status !== "paid" && (
+              <form action={action}>
+                <button
+                  type="submit"
+                  disabled={pending}
+                  className="w-[131px] ml-[2px] h-[48px] bg-lavender-purple rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold"
+                >
+                  {renderStatusText()}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       )}
