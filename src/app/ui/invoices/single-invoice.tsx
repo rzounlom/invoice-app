@@ -1,9 +1,14 @@
-import { FC } from "react";
+"use client";
+
+import { FC, useEffect, useState } from "react";
+
+import DeleteInvoiceModal from "./delete-invoice-modal";
 import { FullInvoice } from "@/lib/utils/types/invoices";
 import Image from "next/image";
 import Link from "next/link";
 import SingleInvoiceItemList from "./single-invoice-item-list";
 import StatusCard from "./status-card";
+import { deleteInvoice } from "@/actions/delete-invoice";
 import { formatDate } from "@/lib/utils/format-date";
 
 interface SingleInvoiceProps {
@@ -11,8 +16,33 @@ interface SingleInvoiceProps {
 }
 
 const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Set the initial value
+    checkScreenSize();
+
+    // Add resize event listener
+    window.addEventListener("resize", checkScreenSize);
+
+    // Clean up event listener on unmount
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   return (
     <div className="h-auto w-full max-w-[735px] pb-[70px]">
+      <DeleteInvoiceModal
+        open={open}
+        onClose={handleClose}
+        invoiceId={invoice.id}
+      />
       <Link
         href="/invoices"
         className="w-[100px] flex items-center cursor-pointer font-bold"
@@ -41,7 +71,10 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
             </button>
           </Link>
 
-          <button className="w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold">
+          <button
+            className="w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold"
+            onClick={handleOpen}
+          >
             Delete
           </button>
           <button className="w-[131px] h-[48px] bg-lavender-purple rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold">
@@ -130,23 +163,28 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
         </div>
       </div>
 
-      <div className="md:hidden h-[91px] mt-[31px] shadow-md rounded-[8px] flex justify-between bg-white dark:bg-midnight-navy">
-        <div className="md:hidden h-full w-full p-[24px] flex justify-between items-center">
-          <Link href={`/invoices/${invoice.id}}/edit`}>
-            <button className="w-[73px] h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold">
-              Edit
-            </button>
-          </Link>
+      {isMobile && (
+        <div className="md:hidden h-[91px] mt-[31px] shadow-md rounded-[8px] flex justify-between bg-white dark:bg-midnight-navy">
+          <div className="md:hidden h-full w-full p-[24px] flex justify-between items-center">
+            <Link href={`/invoices/${invoice.id}}/edit`}>
+              <button className="w-[73px] h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold">
+                Edit
+              </button>
+            </Link>
 
-          <button className="w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold">
-            Delete
-          </button>
-          <button className="w-[131px] h-[48px] bg-lavender-purple rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold">
-            {" "}
-            Mark as Paid
-          </button>
+            <button
+              className="w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold"
+              onClick={handleOpen}
+            >
+              Delete
+            </button>
+            <button className="w-[131px] ml-[2px] h-[48px] bg-lavender-purple rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold">
+              {" "}
+              Mark as Paid
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
