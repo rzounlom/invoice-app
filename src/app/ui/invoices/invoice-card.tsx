@@ -26,7 +26,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
               Due
             </span>{" "}
             <span className="ml-[5px] text-cool-blue dark:text-white">
-              {formatDate(new Date(invoice.paymentDue).toISOString())}
+              {formatDate(invoice.paymentDue)}
             </span>
           </p>
           <p className="w-[20%] font-medium text-[13px] text-soft-steel-blue dark:text-white leading-[15px] tracking-[-.1px]">
@@ -53,7 +53,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
             <p className="font-bold tracking-[-.25px] leading[15px]">
               <span className="text-muted-slate">#</span>
               <span className="text-jet-black dark:text-white">
-                {invoice.id}
+                {invoice.id.substring(0, 6).toUpperCase()}
               </span>
             </p>
             <p className="flex text-[13px] tracking-[-.1px] leading[15px]">
@@ -61,7 +61,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({ invoice }) => {
                 Due
               </span>{" "}
               <span className="ml-[5px] text-cool-blue dark:text-white">
-                {formatDate(new Date(invoice.paymentDue).toISOString())}
+                {formatDate(invoice.paymentDue)}
               </span>
             </p>
             <p className="font-bold text-jet-black dark:text-white leading-[24px] tracking-[-.25px]">
