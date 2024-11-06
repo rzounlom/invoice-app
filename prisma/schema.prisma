@@ -29,11 +29,11 @@ model Invoice {
   clientName      String
   clientEmail     String
   status          String
-  senderAddress   Address  @relation("SenderAddress", fields: [senderAddressId], references: [id])
+  senderAddress   Address  @relation("SenderAddress", fields: [senderAddressId], references: [id], onDelete: Cascade)
   senderAddressId String // Foreign key to Address (sender address)
-  clientAddress   Address  @relation("ClientAddress", fields: [clientAddressId], references: [id])
+  clientAddress   Address  @relation("ClientAddress", fields: [clientAddressId], references: [id], onDelete: Cascade)
   clientAddressId String // Foreign key to Address (client address)
-  items           Item[] // One-to-many relationship with items
+  items           Item[] // One-to-many relationship with items 
   total           Float
 
   // Foreign key to User
@@ -64,5 +64,5 @@ model Item {
 
   // Foreign key to Invoice
   invoiceId String
-  invoice   Invoice @relation(fields: [invoiceId], references: [id])
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
 }

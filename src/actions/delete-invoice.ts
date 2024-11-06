@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -15,6 +17,11 @@ export const deleteInvoice = async (
   const invoice = await db.invoice.findUnique({
     where: {
       id,
+    },
+    include: {
+      items: true,
+      senderAddress: true,
+      clientAddress: true,
     },
   });
 

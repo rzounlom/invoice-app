@@ -44,10 +44,7 @@ const DeleteInvoiceModal: FC<DeleteInvoiceModalProps> = ({
             transition
             className="relative transform overflow-hidden rounded-lg bg-white dark:bg-midnight-navy px-4 pb-4 pt-5 text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-lg sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
           >
-            <form
-              action={action}
-              className="w-full h-[220px] flex flex-col bg-white dark:bg-midnight-navy rounded-[8px] px-[32px] py-[34px]"
-            >
+            <div className="w-full h-[220px] flex flex-col bg-white dark:bg-midnight-navy rounded-[8px] px-[32px] py-[34px]">
               <p className="text-jet-black dark:text-white text-[24px] font-bold leading-[32px] tracking-[-.5px]">
                 Confirm Deletion
               </p>
@@ -63,15 +60,17 @@ const DeleteInvoiceModal: FC<DeleteInvoiceModalProps> = ({
                 >
                   Cancel
                 </button>
-                <button
-                  className="bg-coral-red text-white rounded-[24px] w-[89px] h-[48px] ml-[8px]"
-                  type="submit"
-                  disabled={pending}
-                >
-                  {pending ? "Deleting..." : "Delete"}
-                </button>
+                <form action={action}>
+                  <button
+                    className="bg-coral-red text-white rounded-[24px] w-[89px] h-[48px] ml-[8px]"
+                    type="submit"
+                    disabled={pending}
+                  >
+                    {pending ? "Deleting..." : "Delete"}
+                  </button>
+                </form>
               </div>
-            </form>
+            </div>
           </DialogPanel>
         </div>
       </div>
