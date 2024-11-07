@@ -4,7 +4,7 @@ import { Item } from "@prisma/client";
 
 interface InvoiceItemProps {
   item: Omit<Item, "id">;
-  onRemoveItem: (id: string) => void;
+  onRemoveItem: (item: Item | Omit<Item, "id">) => void;
 }
 
 const InvoiceItem: FC<InvoiceItemProps> = ({ item, onRemoveItem }) => {
@@ -83,7 +83,7 @@ const InvoiceItem: FC<InvoiceItemProps> = ({ item, onRemoveItem }) => {
         <div className="mt-[25px] w-[15%] flex justify-center items-center text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate">
           <FaTrash
             className="hover:cursor-pointer hover:text-coral-red mt-[21px] transition-colors duration-250 ease-in-out"
-            onClick={() => onRemoveItem(item.invoiceId)}
+            onClick={() => onRemoveItem(item)}
           />
         </div>
       </div>

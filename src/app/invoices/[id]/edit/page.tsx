@@ -1,17 +1,19 @@
+import EditInvoice from "@/app/ui/invoices/edit-invoice";
 import { FC } from "react";
+import { FullInvoice } from "@/lib/utils/types/invoices";
 import InvoiceMain from "@/app/ui/invoices/invoices-main";
 import { db } from "@/db";
 
-interface SingleInvoiceProps {
+interface EditleInvoiceProps {
   params: {
     id: string;
   };
 }
 
-const SingleInvoice: FC<SingleInvoiceProps> = async ({ params }) => {
+const EditleInvoice: FC<EditleInvoiceProps> = async ({ params }) => {
   const { id } = params;
 
-  const invoice = await db.invoice.findUnique({
+  const invoice: FullInvoice | null = await db.invoice.findUnique({
     where: {
       id,
     },
@@ -24,15 +26,9 @@ const SingleInvoice: FC<SingleInvoiceProps> = async ({ params }) => {
 
   return (
     <div className="w-full h-[calc(100vh-80px)] xl:w-[calc(100vw-103px)] xl:h-full">
-      <InvoiceMain>
-        <div className="border h-full w-full flex flex-col">
-          <div className="h-[91px] ">
-            Single Invoice Edit page with invoice {id}
-          </div>
-        </div>
-      </InvoiceMain>
+      <InvoiceMain>{invoice && <EditInvoice invoice={invoice} />}</InvoiceMain>
     </div>
   );
 };
 
-export default SingleInvoice;
+export default EditleInvoice;

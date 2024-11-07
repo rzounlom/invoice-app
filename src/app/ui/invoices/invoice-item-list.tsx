@@ -4,7 +4,7 @@ import { Item } from "@prisma/client";
 
 interface InvoiceItemListProps {
   items: Omit<Item, "id">[];
-  onRemoveItem: (id: string) => void;
+  onRemoveItem: (item: Item | Omit<Item, "id">) => void;
 }
 
 const InvoiceItemList: FC<InvoiceItemListProps> = ({ items, onRemoveItem }) => {
@@ -14,9 +14,9 @@ const InvoiceItemList: FC<InvoiceItemListProps> = ({ items, onRemoveItem }) => {
         Item List
       </p>
 
-      {items.map((item) => (
+      {items.map((item, idx) => (
         <InvoiceItem
-          key={item.invoiceId}
+          key={`${idx}-${item.invoiceId}`}
           item={item}
           onRemoveItem={onRemoveItem}
         />

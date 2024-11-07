@@ -26,7 +26,7 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
 
   const { pending } = useFormStatus();
 
-  const [formState, action] = useFormState(
+  const [, action] = useFormState(
     actions.updateInvoiceStatus.bind(
       null,
       invoice.id,
@@ -99,12 +99,13 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
             }
           )}
         >
-          <Link href={`/invoices/${invoice.id}}/edit`}>
+          <Link href={`/invoices/${invoice.id}/edit`}>
             <button
               className={clsx(
-                `w-[73px] h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
+                `h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
                 {
                   "w-[131px]": invoice.status === "paid",
+                  "w-[73px]": invoice.status !== "paid",
                 }
               )}
             >
@@ -114,9 +115,10 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
 
           <button
             className={clsx(
-              `w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
+              `h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
               {
                 "w-[131px]": invoice.status === "paid",
+                "w-[89px]": invoice.status !== "paid",
               }
             )}
             onClick={handleOpen}
@@ -226,11 +228,14 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
               }
             )}
           >
-            <Link href={`/invoices/${invoice.id}}/edit`}>
+            <Link href={`/invoices/${invoice.id}/edit`}>
               <button
                 className={clsx(
-                  `w-[73px] h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
-                  { "w-[131px]": invoice.status === "paid" }
+                  `h-[48px] bg-muted-white dark:bg-deep-charcoal rounded-[24px] text-cool-blue dark:text-pale-periwinkle text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
+                  {
+                    "w-[131px]": invoice.status === "paid",
+                    "w-[73px]": invoice.status !== "paid",
+                  }
                 )}
               >
                 Edit
@@ -239,9 +244,10 @@ const SingleInvoice: FC<SingleInvoiceProps> = ({ invoice }) => {
 
             <button
               className={clsx(
-                `w-[89px] h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
+                `h-[48px] bg-coral-red rounded-[24px] text-white text-[15px] leading-[15px] tracking-[-.25px] font-bold`,
                 {
                   "w-[131px]": invoice.status === "paid",
+                  "w-[89px]": invoice.status !== "paid",
                 }
               )}
               onClick={handleOpen}

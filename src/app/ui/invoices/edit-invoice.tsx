@@ -5,6 +5,7 @@ import * as actions from "@/actions";
 import { FC, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
+import { FullInvoice } from "@/lib/utils/types/invoices";
 import Image from "next/image";
 import InvoiceItemList from "./invoice-item-list";
 import { Item } from "@prisma/client";
@@ -12,14 +13,28 @@ import Link from "next/link";
 import NewInvoiceModal from "./new-invoice-modal";
 import { v4 as uuidv4 } from "uuid";
 
-const NewInvoice: FC = () => {
-  const [invoiceItmes, setInvoiceItems] = useState<Omit<Item, "id">[]>([]);
+interface EditInvoiceProps {
+  invoice: FullInvoice;
+}
+
+const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
+  const [invoiceItmes, setInvoiceItems] = useState<Item[] | Omit<Item, "id">[]>(
+    invoice.items
+  );
+
+  const [itemsToDelete, setItemsToDelete] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
   const [invoiceStatus, setInvoiceStatus] = useState<"pending" | "draft">(
     "pending"
   );
   const [formState, action] = useFormState(
-    actions.createInvoice.bind(null, invoiceStatus, invoiceItmes),
+    actions.editInvoice.bind(
+      null,
+      invoice,
+      invoiceStatus,
+      invoiceItmes,
+      itemsToDelete
+    ),
     {
       errors: {},
     }
@@ -38,9 +53,22 @@ const NewInvoice: FC = () => {
   };
 
   const handleDeleteItem = (currentItem: Item | Omit<Item, "id">) => {
-    setInvoiceItems(
-      invoiceItmes.filter((item) => item.invoiceId !== currentItem.invoiceId)
-    );
+    if ("id" in currentItem) {
+      setItemsToDelete([...itemsToDelete, currentItem.id]);
+      const newItems = invoiceItmes.filter((item) => {
+        if ("id" in item && item.id !== currentItem.id) {
+          return item.id !== currentItem.id;
+        } else {
+          return item.invoiceId !== currentItem.invoiceId;
+        }
+      });
+
+      setInvoiceItems(newItems);
+    } else {
+      setInvoiceItems(
+        invoiceItmes.filter((item) => item.invoiceId !== currentItem.invoiceId)
+      );
+    }
   };
 
   const handleOpen = () => setOpen(true);
@@ -56,7 +84,7 @@ const NewInvoice: FC = () => {
 
       <form action={action} className="h-auto w-full max-w-[735px] pb-[100px]">
         <Link
-          href="/invoices"
+          href={`/invoices/${invoice.id}`}
           className="w-[100px] flex items-center cursor-pointer font-bold"
         >
           <Image
@@ -69,7 +97,7 @@ const NewInvoice: FC = () => {
           <p className="ml-[23px] text-[15px]">Go Back</p>
         </Link>
         <p className="mt-[26px] font-bold text-[24px] leading-[32px] tracking-[-.5px]">
-          New Invoice{" "}
+          Edit Invoice{" "}
         </p>
 
         {/* Business Info */}
@@ -96,6 +124,7 @@ const NewInvoice: FC = () => {
                 name="senderStreet"
                 type="text"
                 placeholder="777 Miami Ave"
+                defaultValue={invoice.senderAddress.street}
                 className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
@@ -112,6 +141,7 @@ const NewInvoice: FC = () => {
                   name="senderCity"
                   type="text"
                   placeholder="Miami"
+                  defaultValue={invoice.senderAddress.city}
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
@@ -127,6 +157,7 @@ const NewInvoice: FC = () => {
                   name="senderPostalCode"
                   type="text"
                   placeholder="46240"
+                  defaultValue={invoice.senderAddress.postCode}
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
@@ -142,6 +173,7 @@ const NewInvoice: FC = () => {
                   name="senderCountry"
                   type="text"
                   placeholder="United States"
+                  defaultValue={invoice.senderAddress.country}
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
@@ -182,6 +214,7 @@ const NewInvoice: FC = () => {
                 name="clientName"
                 type="text"
                 placeholder="Alex Grim"
+                defaultValue={invoice.clientName}
                 className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
@@ -197,6 +230,7 @@ const NewInvoice: FC = () => {
                 name="clientEmail"
                 type="text"
                 placeholder="alexgrim@mail.com"
+                defaultValue={invoice.clientEmail}
                 className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
@@ -212,6 +246,7 @@ const NewInvoice: FC = () => {
                 name="clientStreet"
                 type="text"
                 placeholder="84 Church Way"
+                defaultValue={invoice.clientAddress.street}
                 className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
@@ -228,6 +263,7 @@ const NewInvoice: FC = () => {
                   name="clientCity"
                   type="text"
                   placeholder="Bradford"
+                  defaultValue={invoice.clientAddress.city}
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
@@ -243,6 +279,7 @@ const NewInvoice: FC = () => {
                   name="clientPostalCode"
                   type="text"
                   placeholder="BD1 9PB"
+                  defaultValue={invoice.clientAddress.postCode}
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
@@ -258,6 +295,7 @@ const NewInvoice: FC = () => {
                   name="clientCountry"
                   type="text"
                   placeholder="United Kingdom"
+                  defaultValue={invoice.clientAddress.country}
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
@@ -292,6 +330,7 @@ const NewInvoice: FC = () => {
                   id="invoiceDate"
                   name="invoiceDate"
                   type="date"
+                  defaultValue={invoice.paymentDue.toISOString().split("T")[0]}
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy dark:text-muted-slate"
                 />
               </div>
@@ -305,6 +344,7 @@ const NewInvoice: FC = () => {
                 <select
                   id="paymentTerms"
                   name="paymentTerms"
+                  defaultValue={invoice.paymentTerms.toString()}
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy dark:text-muted-slate"
                 >
                   <option value="1">Net 30</option>
@@ -329,6 +369,7 @@ const NewInvoice: FC = () => {
                   id="description"
                   name="description"
                   type="text"
+                  defaultValue={invoice.description}
                   placeholder="Graphic Design"
                   className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
@@ -341,6 +382,7 @@ const NewInvoice: FC = () => {
             items={invoiceItmes}
             onRemoveItem={handleDeleteItem}
           />
+
           {formState.errors.items && (
             <div className="mt-2 rounded p-2 bg-red-200 border border-red-400">
               {formState.errors.items && formState.errors.items.join(", ")}
@@ -363,9 +405,9 @@ const NewInvoice: FC = () => {
             {formState.errors._form && `${formState.errors._form.join(", ")}`}
           </div>
           <div className="h-[91px] mt-[41px] bg-white dark:bg-midnight-navy flex items-center justify-around md:justify-between md:px-[30px]">
-            <Link href="/invoices">
+            <Link href={`/invoices/${invoice.id}`}>
               <button className="border h-[48px] w-[84px] rounded-[24px] bg-muted-white text-[15px] font-bold text-cool-blue leading-[15px] tracking-[-.25px]">
-                Discard
+                Cancel
               </button>
             </Link>{" "}
             <div className="w-[70%] md:w-[45%] flex justify-around">
@@ -393,4 +435,4 @@ const NewInvoice: FC = () => {
   );
 };
 
-export default NewInvoice;
+export default EditInvoice;
