@@ -96,7 +96,7 @@ const NewInvoice: FC = () => {
                 name="senderStreet"
                 type="text"
                 placeholder="777 Miami Ave"
-                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
             <div className="flex flex-wrap justify-between">
@@ -112,7 +112,7 @@ const NewInvoice: FC = () => {
                   name="senderCity"
                   type="text"
                   placeholder="Miami"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
               <div className="mt-[25px] w-[47%] md:w-[32%]">
@@ -127,7 +127,7 @@ const NewInvoice: FC = () => {
                   name="senderPostalCode"
                   type="text"
                   placeholder="46240"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
               <div className="mt-[25px] w-full md:w-[32%]">
@@ -142,7 +142,7 @@ const NewInvoice: FC = () => {
                   name="senderCountry"
                   type="text"
                   placeholder="United States"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
             </div>
@@ -182,7 +182,7 @@ const NewInvoice: FC = () => {
                 name="clientName"
                 type="text"
                 placeholder="Alex Grim"
-                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
             <div>
@@ -197,7 +197,7 @@ const NewInvoice: FC = () => {
                 name="clientEmail"
                 type="text"
                 placeholder="alexgrim@mail.com"
-                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
             <div>
@@ -212,7 +212,7 @@ const NewInvoice: FC = () => {
                 name="clientStreet"
                 type="text"
                 placeholder="84 Church Way"
-                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
             <div className="flex flex-wrap justify-between">
@@ -228,7 +228,7 @@ const NewInvoice: FC = () => {
                   name="clientCity"
                   type="text"
                   placeholder="Bradford"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
               <div className="mt-[25px] w-[47%] md:w-[32%]">
@@ -243,7 +243,7 @@ const NewInvoice: FC = () => {
                   name="clientPostalCode"
                   type="text"
                   placeholder="BD1 9PB"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
               <div className="mt-[25px] w-full md:w-[32%]">
@@ -258,7 +258,7 @@ const NewInvoice: FC = () => {
                   name="clientCountry"
                   type="text"
                   placeholder="United Kingdom"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
             </div>
@@ -305,7 +305,7 @@ const NewInvoice: FC = () => {
                 <select
                   id="paymentTerms"
                   name="paymentTerms"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy dark:text-muted-slate"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 >
                   <option value="1">Net 30</option>
                   <option value="2">Net 60</option>
@@ -330,7 +330,7 @@ const NewInvoice: FC = () => {
                   name="description"
                   type="text"
                   placeholder="Graphic Design"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
             </div>

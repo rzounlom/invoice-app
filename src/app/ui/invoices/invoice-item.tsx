@@ -24,7 +24,7 @@ const InvoiceItem: FC<InvoiceItemProps> = ({ item, onRemoveItem }) => {
           type="text"
           value={item.name}
           placeholder="Banner Design"
-          className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
+          className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white dark:bg-midnight-navy shadow-smring-1  ring-1 dark:ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
         />
       </div>
 
@@ -43,7 +43,7 @@ const InvoiceItem: FC<InvoiceItemProps> = ({ item, onRemoveItem }) => {
             type="text"
             value={item.quantity}
             placeholder="1"
-            className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
+            className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white dark:bg-midnight-navy shadow-sm ring-1 dark:ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
           />
         </div>
         <div className="mt-[25px] w-[31%]">
@@ -60,7 +60,7 @@ const InvoiceItem: FC<InvoiceItemProps> = ({ item, onRemoveItem }) => {
             type="text"
             value={item.price}
             placeholder="156.00"
-            className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
+            className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white dark:bg-midnight-navy shadow-sm ring-1 dark:ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
           />
         </div>
         <div className="mt-[25px] w-[31%] ml-[5px]">
@@ -77,7 +77,7 @@ const InvoiceItem: FC<InvoiceItemProps> = ({ item, onRemoveItem }) => {
             type="text"
             value={item.total}
             placeholder="0"
-            className="mt-[9px] bg-transparent dark:text-muted-slate block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:ring-inset sm:text-sm sm:leading-6"
+            className="mt-[9px] bg-transparent block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white dark:bg-midnight-navy placeholder:text-gray-400 focus:ring-0 focus:ring-inset sm:text-sm sm:leading-6"
           />
         </div>
         <div className="mt-[25px] w-[15%] flex justify-center items-center text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate">
