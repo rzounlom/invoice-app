@@ -79,7 +79,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
         <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
           <DialogPanel
             transition
-            className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4  text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-lg sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+            className="relative transform overflow-hidden rounded-lg bg-white dark:bg-dark-indigo px-4 pb-4  text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-lg sm:p-6 data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
           >
             <div className="h-[10px] text-coral-red">
               {error && "Please fill out all fields"}
@@ -98,7 +98,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                   type="text"
                   value={item.name}
                   placeholder="Banner Design"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white dark:bg-midnight-navy shadow-sm ring-1 dark:ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
                   onChange={handleItemChange}
                 />
               </div>
@@ -116,7 +116,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                     type="number"
                     value={item.quantity}
                     placeholder="1"
-                    className="mt-[9px] block w-full h-[48px] rounded-md border-0  py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
+                    className="mt-[9px] block w-full h-[48px] rounded-md border-0  py-1.5 text-gray-900 dark:text-white dark:bg-midnight-navy shadow-sm ring-1 dark:ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
                     onChange={handleItemChange}
                   />
                 </div>
@@ -133,7 +133,7 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                     type="number"
                     value={item.price}
                     placeholder={"156.00"}
-                    className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
+                    className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white dark:bg-midnight-navy shadow-sm ring-1 dark:ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6"
                     onChange={handleItemChange}
                   />
                 </div>
@@ -151,10 +151,10 @@ const NewInvoiceModal: FC<NewInvoiceModalProps> = ({
                     type="number"
                     value={item.total}
                     placeholder="0"
-                    className="mt-[9px] bg-transparent dark:text-muted-slate block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:ring-inset sm:text-sm sm:leading-6"
+                    className="mt-[9px] bg-transparent dark:text-white block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:ring-inset sm:text-sm sm:leading-6"
                   />
                 </div>
-                <div className="mt-[25px] w-[15%] flex justify-center items-center text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-muted-slate">
+                <div className="mt-[25px] w-[15%] flex justify-center items-center text-[13px] font-medium leading-[15px] tracking-[-.1px] text-cool-blue dark:text-white">
                   <FaPlus
                     className="hover:cursor-pointer hover:text-emerald-green mt-[21px] transition-colors duration-250 ease-in-out"
                     onClick={handleAddItem}
