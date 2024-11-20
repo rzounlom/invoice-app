@@ -23,7 +23,7 @@ This is a solution to the [Invoice app challenge on Frontend Mentor](https://www
 
 ### Links
 
-- Solution URL: (https://www.frontendmentor.io/solutions/vite-tailwind-css-pomodoro-app-KeD3XwipxG)
+- Solution URL: (https://www.frontendmentor.io/solutions/invoice-app-built-with-nextjs-tailwind-clerk-prisma-and-sqlite-brWuZ7NGtj)
 - Live Site URL: (https://invoice-app-teal-omega.vercel.app/)
 - Gituhb Repo URL: (https://github.com/rzounlom/invoice-app)
 
