@@ -11,8 +11,7 @@ interface DeleteInvoiceFormState {
 }
 
 export const deleteInvoice = async (
-  id: string,
-  formState: DeleteInvoiceFormState
+  id: string
 ): Promise<DeleteInvoiceFormState> => {
   const invoice = await db.invoice.findUnique({
     where: {

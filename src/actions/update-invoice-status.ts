@@ -11,8 +11,7 @@ interface UpdateInvoiceStatusInvoiceFormState {
 
 export const updateInvoiceStatus = async (
   id: string,
-  status: string,
-  formState: UpdateInvoiceStatusInvoiceFormState
+  status: string
 ): Promise<UpdateInvoiceStatusInvoiceFormState> => {
   const invoice = await db.invoice.findUnique({
     where: {
@@ -34,7 +33,7 @@ export const updateInvoiceStatus = async (
   }
 
   try {
-    const updatedInvoice = await db.invoice.update({
+    await db.invoice.update({
       where: { id },
       data: {
         status,

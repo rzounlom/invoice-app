@@ -22,12 +22,9 @@ const DeleteInvoiceModal: FC<DeleteInvoiceModalProps> = ({
     onClose();
   };
 
-  const [formState, action] = useFormState(
-    actions.deleteInvoice.bind(null, invoiceId),
-    {
-      errors: {},
-    }
-  );
+  const [, action] = useFormState(actions.deleteInvoice.bind(null, invoiceId), {
+    errors: {},
+  });
 
   const { pending } = useFormStatus();
 
