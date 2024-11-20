@@ -125,7 +125,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                 type="text"
                 placeholder="777 Miami Ave"
                 defaultValue={invoice.senderAddress.street}
-                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
             <div className="flex flex-wrap justify-between">
@@ -142,7 +142,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                   type="text"
                   placeholder="Miami"
                   defaultValue={invoice.senderAddress.city}
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
               <div className="mt-[25px] w-[47%] md:w-[32%]">
@@ -158,7 +158,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                   type="text"
                   placeholder="46240"
                   defaultValue={invoice.senderAddress.postCode}
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
               <div className="mt-[25px] w-full md:w-[32%]">
@@ -174,7 +174,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                   type="text"
                   placeholder="United States"
                   defaultValue={invoice.senderAddress.country}
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
             </div>
@@ -215,7 +215,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                 type="text"
                 placeholder="Alex Grim"
                 defaultValue={invoice.clientName}
-                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
             <div>
@@ -231,7 +231,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                 type="text"
                 placeholder="alexgrim@mail.com"
                 defaultValue={invoice.clientEmail}
-                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
             <div>
@@ -247,7 +247,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                 type="text"
                 placeholder="84 Church Way"
                 defaultValue={invoice.clientAddress.street}
-                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
               />
             </div>
             <div className="flex flex-wrap justify-between">
@@ -264,7 +264,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                   type="text"
                   placeholder="Bradford"
                   defaultValue={invoice.clientAddress.city}
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
               <div className="mt-[25px] w-[47%] md:w-[32%]">
@@ -280,7 +280,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                   type="text"
                   placeholder="BD1 9PB"
                   defaultValue={invoice.clientAddress.postCode}
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
               <div className="mt-[25px] w-full md:w-[32%]">
@@ -296,7 +296,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                   type="text"
                   placeholder="United Kingdom"
                   defaultValue={invoice.clientAddress.country}
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 px-[20px] py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
             </div>
@@ -345,7 +345,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                   id="paymentTerms"
                   name="paymentTerms"
                   defaultValue={invoice.paymentTerms.toString()}
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy dark:text-muted-slate"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy dark:text-white"
                 >
                   <option value="1">Net 30</option>
                   <option value="2">Net 60</option>
@@ -371,7 +371,7 @@ const EditInvoice: FC<EditInvoiceProps> = ({ invoice }) => {
                   type="text"
                   defaultValue={invoice.description}
                   placeholder="Graphic Design"
-                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
+                  className="mt-[9px] block w-full h-[48px] rounded-md border-0 py-1.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-dark-indigo  placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-midnight-navy"
                 />
               </div>
             </div>
