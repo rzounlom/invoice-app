@@ -16,9 +16,15 @@ export default clerkMiddleware(async (auth, request) => {
     return NextResponse.redirect(invoicesUrl);
   }
 
-  // Protect non-public routes
-  if (!isPublicRoute(request)) {
-    auth().protect();
+  // Allow access to public routes
+  if (isPublicRoute(request)) {
+    return NextResponse.next();
+  }
+
+  // Redirect unauthenticated users to the sign-in page
+  if (!auth().userId) {
+    const signInUrl = new URL("/sign-in", request.url);
+    return NextResponse.redirect(signInUrl);
   }
 
   return NextResponse.next();
