@@ -10,12 +10,6 @@ const isPublicRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
-  const originalPath = request.nextUrl.pathname;
-  const rewrittenPath = request.nextUrl.pathname;
-
-  console.log("Original Path:", originalPath);
-  console.log("Rewritten Path:", rewrittenPath);
-
   // Skip processing for internal Next.js paths (e.g., /_next)
   if (request.nextUrl.pathname.startsWith("/_next")) {
     return NextResponse.next();
