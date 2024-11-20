@@ -10,6 +10,17 @@ const isPublicRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
+  const originalPath = request.nextUrl.pathname;
+  const rewrittenPath = request.nextUrl.pathname;
+
+  console.log("Original Path:", originalPath);
+  console.log("Rewritten Path:", rewrittenPath);
+
+  // Skip processing for internal Next.js paths (e.g., /_next)
+  if (request.nextUrl.pathname.startsWith("/_next")) {
+    return NextResponse.next();
+  }
+
   // Check if the user is signed in and accessing the home route
   if (auth().userId && request.nextUrl.pathname === "/") {
     const invoicesUrl = new URL("/invoices", request.url);
