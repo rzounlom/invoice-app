@@ -23,7 +23,7 @@ export default clerkMiddleware(async (auth, request) => {
 
   // Check if the user is signed in and accessing the home route
   if (auth().userId && request.nextUrl.pathname === "/") {
-    const invoicesUrl = new URL("/invoices", request.url);
+    const invoicesUrl = new URL("/new-user", request.url);
     return NextResponse.redirect(invoicesUrl);
   }
 

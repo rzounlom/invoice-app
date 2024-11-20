@@ -1,27 +1,24 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+// 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./prisma/dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Use Neon-provided connection string
 }
 
 model User {
-  id        String    @id @default(uuid())
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email     String    @unique
   createdAt DateTime  @default(now())
   clerkId   String    @unique
   name      String?
-  // Relationships
   invoices  Invoice[] // A user can have multiple invoices
 }
 
 model Invoice {
-  id              String   @id @default(uuid())
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt       DateTime @default(now())
   paymentDue      DateTime
   description     String
@@ -30,39 +27,31 @@ model Invoice {
   clientEmail     String
   status          String
   senderAddress   Address  @relation("SenderAddress", fields: [senderAddressId], references: [id], onDelete: Cascade)
-  senderAddressId String // Foreign key to Address (sender address)
+  senderAddressId String   @db.Uuid
   clientAddress   Address  @relation("ClientAddress", fields: [clientAddressId], references: [id], onDelete: Cascade)
-  clientAddressId String // Foreign key to Address (client address)
-  items           Item[] // One-to-many relationship with items 
-  total           Float
-
-  // Foreign key to User
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  clientAddressId String   @db.Uuid
+  items           Item[]   // One-to-many relationship with items
+  total           Float    @db.DoublePrecision
+  userId          String   @db.Uuid
+  user            User     @relation(fields: [userId], references: [id])
 }
 
 model Address {
-  id       String @id @default(uuid())
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   street   String
   city     String
   postCode String
   country  String
-
-  // Invoices linked to this address as client
   clientInvoices Invoice[] @relation("ClientAddress")
-
-  // Invoices linked to this address as sender
   senderInvoices Invoice[] @relation("SenderAddress")
 }
 
 model Item {
-  id       String @id @default(uuid())
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name     String
   quantity Int
   price    Float
-  total    Float
-
-  // Foreign key to Invoice
-  invoiceId String
+  total    Float @db.DoublePrecision
+  invoiceId String @db.Uuid
   invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
 }
